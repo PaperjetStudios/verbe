@@ -45,13 +45,13 @@ export const makeFilterString = (filters?: ProductFilters) => {
     if (filters.price !== "none" && filters.price) {
       sortString = "sort:[";
 
-      sortString += `"LowestPrice:${filters.price}"`;
+      sortString += `"Price:${filters.price}"`;
 
       sortString += "]";
     }
 
-    if (filters.condition !== "none" && filters.condition) {
-      filterString += `, Condition: {eq: "${filters.condition}"}`;
+    if (filters.size !== "all" && filters.size) {
+      filterString += `, Sizes: { Label : eq: "${filters.size}"}}`;
     }
     if (filters.instock) {
       filterString += `, in_stock: {eq: ${filters.instock}}`;

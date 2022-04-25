@@ -1,13 +1,15 @@
 import { Box, Button } from "@chakra-ui/react";
 
-import { ReactElement } from "react";
-import nookies from "nookies";
+import Holder from "../../../components/profile/Holder/Holder";
 
 const pageQuery = "profile";
 
 const OrderSinglePage = (props) => {
-  // @ts-ignore
-  return <Box></Box>;
+  return (
+    <Box>
+      <Holder title="Order" content={<>Hello</>} />
+    </Box>
+  );
 };
 
 export default OrderSinglePage;

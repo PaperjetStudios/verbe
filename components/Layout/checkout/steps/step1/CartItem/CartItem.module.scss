@@ -1,0 +1,17 @@
+@import "../../../../../../styles/globals.scss";
+
+
+.centered {
+    display: flex;
+    justify-content: center;
+  }
+  .spaceBetween {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .middled {
+    display: flex;
+    align-items: center;
+    gap:10px;
+  }

@@ -1,0 +1,59 @@
+@import "../../../styles/globals.scss";
+
+.container {
+    grid-template-columns: 25% 1fr;
+    display:grid;
+    gap:20px;
+    .sideBar {
+        background-color: #fff;
+        @include shadow();
+        @include rounded();
+        padding: 30px;
+        h4 {
+            font-weight: bold;
+            font-size:24px;
+        }
+        .menuItems {
+            display:flex;
+            flex-direction:column;
+            gap:10px;
+            .menuItem {
+                font-size:16px;
+                color:#999;
+                display:flex;
+                flex-direction: row;
+                align-items: center;
+                cursor:pointer;
+
+                svg {
+                    opacity:0;
+                    width:8px;
+                    height:15px;
+                    padding-left:0px;
+                    @include transition();
+                }
+                &:hover svg, &.currentMenuItem svg {
+                    opacity:1;
+                    padding-left:10px;
+                }
+                &.currentMenuItem {
+                    color:#000;
+                    font-weight:600;
+                }
+
+               
+            }
+        }
+    }
+    .content {
+        background-color: #fff;
+        @include shadow();
+        @include rounded();
+        padding:30px;
+        .topHolder {
+            display:flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+}

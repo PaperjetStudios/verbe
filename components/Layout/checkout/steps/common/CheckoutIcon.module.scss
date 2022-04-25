@@ -1,0 +1,50 @@
+@import "../../../../../styles/globals.scss";
+
+@mixin iconBox {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  background: #fff;
+  svg {
+    width: 20px;
+  }
+}
+.container {
+  width: 200px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  .iconContainer {
+    @include transition();
+    @include iconBox();
+  
+  &.activeIcon {
+    @include transition();
+    transform:scale(1.1);
+    @include shadow();
+  }
+}
+  .iconText {
+    font-weight: 600;
+    margin: 20px 0px;
+    font-size: 14px;
+  }
+}
+
+.line {
+  position: relative;
+  top: -30px;
+  width: 80%;
+  height: 3px;
+  border-radius: 5px;
+  background: #ccc;
+  @include transition();
+  &.activeLine {
+    height: 3px;
+  background: #000;
+  }
+}

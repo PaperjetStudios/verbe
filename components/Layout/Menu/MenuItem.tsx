@@ -8,7 +8,7 @@ const MenuItem: React.FC<MainMenuItemType> = (item) => {
   const extraClass = item.Extra_Class;
   let slug = "";
   if (page) {
-    slug = page.attributes.slug;
+    slug = page.attributes.slug === "home" ? "/" : page.attributes.slug;
   } else {
     slug = createCategoryLink(category.attributes.slug);
   }

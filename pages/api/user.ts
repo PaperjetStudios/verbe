@@ -16,39 +16,50 @@ export default async function userRoute(
   const { user, jwt } = getParsedUserCookies(req);
 
   let newUser = { isLoggedIn: true, user: user };
+  console.log(newUser, jwt);
   if (jwt) {
     if (req.method === "POST") {
       try {
-        const { data } = await client(jwt).mutate({
-          mutation: gql`
-            ${USER_FRAGMENT}
-            mutation ($newData: UsersPermissionsUserInput!, $id: ID!) {
-              updateUsersPermissionsUser(id: $id, data: $newData) {
-                ...USER_FRAGMENT
+        await client(jwt)
+          .mutate({
+            mutation: gql`
+              ${USER_FRAGMENT}
+              mutation ($newData: UsersPermissionsUserInput!, $id: ID!) {
+                updateUsersPermissionsUser(id: $id, data: $newData) {
+                  ...USER_FRAGMENT
+                }
               }
-            }
-          `,
-          variables: { newData: req.body, id: user.id },
-        });
-
-        newUser.user = {
-          ...newUser.user,
-          ...data.updateUsersPermissionsUser.data.attributes,
-        };
+            `,
+            variables: { newData: req.body, id: user.id },
+          })
+          .then((data) => {
+            // console.log(data.data.updateUsersPermissionsUser.data.attributes);
+            newUser = {
+              isLoggedIn: true,
+              user: {
+                ...user,
+                //@ts-ignore
+                ...data.data.updateUsersPermissionsUser.data.attributes,
+              },
+            };
+            setCookie(
+              { res },
+              "user",
+              JSON.stringify({ ...newUser, jwt: jwt }),
+              {
+                secure: process.env.NODE_ENV === "production",
+                maxAge: 72576000,
+                httpOnly: true,
+                path: "/",
+              }
+            );
+            res.json(newUser);
+          });
       } catch (e) {
         console.log(e.networkError?.result?.errors);
         res.json(e);
         res.status(405).end();
       }
-
-      setCookie({ res }, "user", JSON.stringify({ ...newUser, jwt: jwt }), {
-        secure: process.env.NODE_ENV === "production",
-        maxAge: 72576000,
-        httpOnly: true,
-        path: "/",
-      });
-      res.json(newUser);
-      res.end();
     } else {
       if (user) {
         if (req.query?.type === "refresh") {

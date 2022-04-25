@@ -1,0 +1,12 @@
+@import "../../../styles/globals.scss";
+
+.container {
+  @include innerWidth();
+  @include componentDefault();
+  padding-top: 30px;
+
+}
+
+.greyBacking {
+  @include greyBacking();
+}

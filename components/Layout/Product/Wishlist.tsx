@@ -75,6 +75,7 @@ const Wishlist: React.FC<WishlistProps> = ({
   return (
     <>
       <IconButton
+        height={"40px"}
         className={className}
         isLoading={userMutation.isLoading}
         variant={variant}

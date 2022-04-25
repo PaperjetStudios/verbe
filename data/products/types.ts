@@ -1,7 +1,4 @@
-import {
-  ConditionFilterProps,
-  PriceFilterProps,
-} from "../atoms/filter/filterAtoms";
+import { PriceFilterProps, SizeFilterProps } from "../atoms/filter/filterAtoms";
 import { Category } from "../categories/types";
 import { ImageType } from "../layout/base";
 import { Review } from "../reviews/types";
@@ -73,6 +70,6 @@ export type ProductSingleProps = {
 
 export type ProductFilters = {
   price?: PriceFilterProps;
-  condition?: ConditionFilterProps;
+  size?: SizeFilterProps;
   instock?: Boolean | null;
 };

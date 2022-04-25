@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useRef, useState } from "react";
 import styles from "./Gallery.module.scss";
 import Slider from "react-slick";
 
@@ -12,6 +12,9 @@ type GallerySliderProps = {
 };
 
 const Gallery: React.FC<GallerySliderProps> = ({ items }) => {
+  const nav1 = useRef();
+  const nav2 = useRef();
+
   const settings = {
     dots: false,
     prevArrow: (
@@ -28,18 +31,58 @@ const Gallery: React.FC<GallerySliderProps> = ({ items }) => {
     slidesToScroll: 1,
   };
 
+  const settings2 = {
+    dots: false,
+    arrows: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    swipeToSlide: true,
+    focusOnSelect: true,
+  };
+
   return (
     <Box className={styles.galleryContainer}>
-      <Slider className={styles.slider} {...settings}>
+      <Slider
+        asNavFor={nav2.current}
+        ref={nav1}
+        className={styles.slider}
+        {...settings}
+      >
         {items.map((item, index) => {
           return (
             <div key={`slide_${index}`}>
               <AspectRatio
-                ratio={1}
+                ratio={0.8}
                 className={styles.slide}
                 style={{
                   backgroundImage: `url(${createImageLink(
                     item.attributes.url
+                  )})`,
+                }}
+              >
+                <></>
+              </AspectRatio>
+            </div>
+          );
+        })}
+      </Slider>
+      <Slider
+        asNavFor={nav1.current}
+        ref={nav2}
+        className={styles.slider_sub}
+        {...settings2}
+      >
+        {items.map((item, index) => {
+          return (
+            <div key={`slide_nav2_${index}`}>
+              <AspectRatio
+                ratio={1}
+                className={styles.slide_small}
+                style={{
+                  backgroundImage: `url(${createImageLink(
+                    item.attributes.formats.thumbnail.url
                   )})`,
                 }}
               >

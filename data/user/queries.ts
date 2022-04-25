@@ -18,14 +18,6 @@ export const USER_FRAGMENT = gql`
           Country
           Zip_Code
         }
-        store {
-          data {
-            id
-            attributes {
-              slug
-            }
-          }
-        }
       }
     }
   }

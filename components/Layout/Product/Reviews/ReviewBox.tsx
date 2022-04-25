@@ -87,7 +87,7 @@ const ReviewBox: React.FC<ReviewBoxProps> = ({
         justifyContent="center"
         alignItems={"center"}
       >
-        <Text size="sm" color="#ccc">
+        <Text fontSize="sm" color="#666">
           No Reviews Yet!
         </Text>
         {writeButton}

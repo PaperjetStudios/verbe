@@ -1,6 +1,5 @@
 import { UseDisclosureProps } from "@chakra-ui/react";
 import AddressFormSingle from "../form/user/address/AddressFormSingle";
-
 import ModalBase from "./ModalBase";
 
 type ModalProps = {

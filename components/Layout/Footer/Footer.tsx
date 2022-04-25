@@ -13,6 +13,7 @@ import {
   getFooterMenu,
 } from "../../../data/settings/main-menu";
 import { getOptionData, OptionDataType } from "../../../data/settings/options";
+import CartDrawer from "../../Common/Cart/CartDrawer";
 
 const Footer = () => {
   const { data: menuData, isLoading: menuLoading } =
@@ -48,8 +49,9 @@ const Footer = () => {
           }
         )}
       </Grid>
-      {/*  <ChatWidget />
       <CartDrawer />
+      {/*  <ChatWidget />
+    
         <SearchModal />*/}
       <GlobalModals />
     </>

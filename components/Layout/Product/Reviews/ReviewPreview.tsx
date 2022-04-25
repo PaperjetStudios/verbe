@@ -20,7 +20,7 @@ const ReviewPreview: React.FC<ReviewPreviewProps> = ({
   if (setRating === -1 || reviews === 0) {
     return (
       <Box className={styles.container}>
-        <Text size="sm" color="#ccc">
+        <Text fontSize="sm" color="#666">
           No Reviews Yet!
         </Text>
       </Box>

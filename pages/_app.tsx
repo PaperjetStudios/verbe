@@ -25,18 +25,18 @@ function MyApp({ Component, pageProps }) {
   const queryClient = useRef(new QueryClient());
 
   const [overallLoading, setOverallLoading] = useState(true);
-  const [routeChanging, setRouteChange] = useState(true);
 
   Router.events.on("routeChangeStart", () => {
     setOverallLoading(true);
-    setRouteChange(true);
+  });
+  Router.events.on("routeChangeError", () => {
+    setOverallLoading(true);
   });
   Router.events.on("routeChangeComplete", () => {
     setOverallLoading(false);
-    setRouteChange(false);
   });
 
-  useEffect((): void => {
+  useEffect(() => {
     setOverallLoading(false);
   }, []);
 

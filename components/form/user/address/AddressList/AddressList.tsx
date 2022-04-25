@@ -50,21 +50,20 @@ const AddressList: React.FC<Props> = ({ children, className, style }) => {
 
   return (
     <>
-      {userData?.Address?.length === 0 ||
-        (!userData.Address && (
-          <Box className={styles.nothingYet}>
-            <Text>You don&apos;t have any addresses yet! </Text>
-            <Button
-              onClick={() => {
-                addAddressDisclosure.onOpen();
-              }}
-              mt={5}
-              variant="main"
-            >
-              Add One
-            </Button>
-          </Box>
-        ))}
+      {(userData?.Address?.length === 0 || !userData.Address) && (
+        <Box className={styles.nothingYet}>
+          <Text>You don&apos;t have any addresses yet! </Text>
+          <Button
+            onClick={() => {
+              addAddressDisclosure.onOpen();
+            }}
+            mt={5}
+            variant="main"
+          >
+            Add One
+          </Button>
+        </Box>
+      )}
       {userData?.Address?.length > 0 && (
         <>
           <Box display="grid" gap={5} pb={5} gridTemplateColumns="1fr 1fr 1fr">

@@ -24,8 +24,14 @@ const ProductTabs: React.FC<ProductTabsProps> = ({ productData, id }) => {
   return (
     <Tabs colorScheme="main" className={styles.container} mb="50px">
       <TabList>
-        <Tab>Information</Tab>
-        <Tab>
+        <Tab fontWeight="bold" fontSize="sm" textTransform={"uppercase"}>
+          Fabric
+        </Tab>
+        <Tab fontWeight="bold" fontSize="sm" textTransform={"uppercase"}>
+          Care Instructions
+        </Tab>
+
+        <Tab fontWeight="bold" fontSize="sm" textTransform={"uppercase"}>
           Reviews{" "}
           {productData.Reviews.data.length > 0 ? (
             <>({productData.Reviews.data.length})</>
@@ -38,28 +44,13 @@ const ProductTabs: React.FC<ProductTabsProps> = ({ productData, id }) => {
       <TabPanels>
         <TabPanel>
           <Box className={styles.infoHolder}>
-            <Text
-              fontWeight={"800"}
-              fontSize={"14px"}
-              mb={3}
-              textTransform="uppercase"
-            >
-              Fabric Content
-            </Text>
-
             <ReactMarkdown className={styles.fabric}>
               {productData.FabricContent}
             </ReactMarkdown>
-            <Divider />
-            <Text
-              fontWeight={"800"}
-              fontSize={"14px"}
-              mb={3}
-              mt={3}
-              textTransform="uppercase"
-            >
-              Care Instructions
-            </Text>
+          </Box>
+        </TabPanel>
+        <TabPanel>
+          <Box className={styles.infoHolder}>
             <ReactMarkdown className={styles.washcare}>
               {productData.WashcareInstructions}
             </ReactMarkdown>

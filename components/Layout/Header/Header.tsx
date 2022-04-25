@@ -120,7 +120,7 @@ const Header = () => {
                 </a>
               </Link>
             )}
-            {isLoggedIn && <AlertIcon />}
+
             <Badge number={itemCount}>
               <IconButton
                 aria-label="cart"

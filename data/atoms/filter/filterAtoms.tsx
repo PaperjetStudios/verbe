@@ -1,18 +1,18 @@
 import { atom } from "jotai";
 import _ from "lodash";
 
-export type ConditionFilterProps = "none" | "Used" | "New";
+export type SizeFilterProps = "all" | "S" | "M" | "L" | "XL" | "XXL";
 export type PriceFilterProps = "none" | "asc" | "desc";
 
-export const ConditionFilterStatus = atom<ConditionFilterProps>("none");
+export const SizeFilterStatus = atom<SizeFilterProps>("all");
 export const PriceFilterStatus = atom<PriceFilterProps>("none");
 
-export const ConditionFilter = atom(
+export const SizeFilter = atom(
   (get) => {
-    return get(ConditionFilterStatus);
+    return get(SizeFilterStatus);
   },
   (get, set, update) => {
-    set(ConditionFilterStatus, update);
+    set(SizeFilterStatus, update);
   }
 );
 

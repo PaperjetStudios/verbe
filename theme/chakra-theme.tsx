@@ -31,6 +31,13 @@ const styles = {
         },
       },
     },
+    Tab: {
+      variants: {
+        product: {
+          textTransform: "uppercase",
+        },
+      },
+    },
     Tag: {
       variants: {
         main: {
@@ -61,8 +68,10 @@ const styles = {
     Button: {
       variants: {
         main: {
-          px: 50,
-          py: 6,
+          px: 10,
+          py: 2,
+          fontSize: 13,
+          textTransform: "uppercase",
           bg: default_colors.dark,
           color: default_colors.light,
           "&:hover": {

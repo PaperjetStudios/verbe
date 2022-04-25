@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { ApolloError, gql, useMutation, useQuery } from "@apollo/client";
 import ProfileFormElement from "./element";
 import { empty, FormType } from "./types";
 
@@ -17,11 +16,7 @@ type Props = {
   buttonText?: string;
 };
 
-const ProfileForm: React.FC<Props> = ({
-  className,
-  style,
-  buttonText = "Update",
-}) => {
+const ProfileForm: React.FC<Props> = ({ buttonText = "Update" }) => {
   //const [userData, setUserData] = useState(empty);
   const { user, userMutation } = useUser();
 
@@ -34,7 +29,6 @@ const ProfileForm: React.FC<Props> = ({
     if (user?.user) {
       methods.reset({ ...user.user, oldEmail: user.user.email });
     }
-    return null;
   }, [user, methods]);
 
   if (!user) {

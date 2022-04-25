@@ -64,6 +64,7 @@ export type LayoutBaseType = {
 export type ImageType = {
   url: string;
   previewUrl: string;
+  formats: any;
   name: string;
 };
 export type LayoutImageType = {

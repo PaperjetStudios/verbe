@@ -10,6 +10,7 @@ export default async function loginRoute(
 ) {
   const { email, password } = await req.body;
   let user = emptyUser;
+
   try {
     createStrapiAxios(null)
       .post("api/auth/local", {
@@ -31,10 +32,10 @@ export default async function loginRoute(
         });
 
         res.json({ ...user });
-        res.end();
+        //  res.end();
       });
   } catch (error) {
-    res.status(500).json({ message: (error as Error).message });
-    res.end();
+    res.status(405).end();
+    //  res.end();
   }
 }

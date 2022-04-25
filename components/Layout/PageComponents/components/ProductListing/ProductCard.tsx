@@ -28,7 +28,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
       <Link href={createProductLink(product.attributes.slug)}>
         <a className={styles.container}>
           <AspectRatio
-            ratio={0.85}
+            ratio={0.6}
             className={styles.featuredImage}
             style={{
               backgroundImage: `url(${createProductImageLink(

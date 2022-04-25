@@ -27,13 +27,9 @@ export type CartItem = {
   Product: {
     data: SingleProduct;
   };
-  Store?: string | number;
   Variation: number;
   Quantity: number;
   Extra: string | null;
 };
 
-export type CartItems = {
-  store: number | string;
-  items: CartItem[];
-};
+export type CartItems = CartItem[];
