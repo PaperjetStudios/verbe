@@ -37,8 +37,12 @@ function MyApp({ Component, pageProps }) {
   });
 
   useEffect(() => {
-    setOverallLoading(false);
-  }, []);
+    if (overallLoading === true) {
+      setTimeout(() => {
+        setOverallLoading(false);
+      }, 5000);
+    }
+  }, [overallLoading]);
 
   const getLayout = Component.getLayout || ((page) => <Layout>{page}</Layout>);
 
