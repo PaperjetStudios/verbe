@@ -17,9 +17,9 @@ type Props = {
 
 const CategoryListing: React.FC<Props> = ({ layout }) => {
   return (
-    <Box className={styles.container}>
+    <Box className={styles.greyBacking}>
       <Box className={styles.container}>
-        <Flex align="center" justify="space-between" gap={8}>
+        <Flex px="20%" align="center" justify="space-between" gap={8}>
           {layout.Item.map((feature, ind) => {
             return (
               <FeaturedCard key={layout.id + "-" + ind} feature={feature} />

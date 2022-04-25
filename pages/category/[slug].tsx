@@ -16,7 +16,7 @@ import { SingleProduct } from "../../data/products/types";
 
 import styles from "./styles.module.scss";
 
-const perPage = 5;
+const perPage = 8;
 
 const Category = (props: any) => {
   const router = useRouter();

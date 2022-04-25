@@ -30,7 +30,7 @@ function MyApp({ Component, pageProps }) {
     setOverallLoading(true);
   });
   Router.events.on("routeChangeError", () => {
-    setOverallLoading(true);
+    setOverallLoading(false);
   });
   Router.events.on("routeChangeComplete", () => {
     setOverallLoading(false);

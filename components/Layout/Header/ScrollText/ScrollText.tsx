@@ -27,7 +27,7 @@ export type ScrollTextProps = {};
 const wordStyle = {
   fontSize: "24px",
   fontWeight: "800",
-  color: "#E6E6E6",
+  color: "#fff",
   textTransform: "uppercase",
 };
 const ScrollText: React.FC<ScrollTextProps> = ({}) => {

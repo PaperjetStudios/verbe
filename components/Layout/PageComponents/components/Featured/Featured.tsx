@@ -23,7 +23,7 @@ const Featured: React.FC<Props> = ({ layout }) => {
 
   const link = createCategoryLink(Category?.data?.attributes.slug);
   return (
-    <Box className={styles.container}>
+    <Box pt="50px" className={styles.container}>
       <CenteredHeader title={Title} />
       <Box display="flex" justifyContent={"center"} mb={10}>
         <Link href={link}>

@@ -1,5 +1,6 @@
 @import "../../../../../styles/globals.scss";
 .container {
   @include innerWidth();
+  margin-top:50px;
   @include componentDefault();
 }

@@ -1,11 +1,15 @@
 @import "../../../../../styles/globals.scss";
 .container {
   @include innerWidth();
-  @include componentDefault();
+
 }
 .categoryBlob {
   border-radius: 100%;
   @include bgDefault();
   @include bobOnHover();
   @include shadowOnHover();
+}
+.greyBacking {
+  @include greyBacking();
+  padding:50px 0px;
 }

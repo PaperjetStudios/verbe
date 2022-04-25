@@ -5,7 +5,7 @@
 }
 
 .box {
-  @include shadow();
+  
   @include bobOnHover();
   @include rounded();
   @include bgDefault();
@@ -14,8 +14,8 @@
   position: relative;
 
   .title {
-    @include textShadow();
-    color:#fff;
+
+    color:#000;
     font-weight: bold;
     font-size: 20px;
     line-height: 1;
@@ -27,14 +27,15 @@
     left: 20px;
     display:flex;
     flex-direction: column;
-    gap:10px;
+    gap:20px;
   }
 
   .cta {
-    background-color: #fff;
+    background-color: #000;
     @include centeredFlex();
     @include rounded();
     gap: 5px;
+    color:#fff;
     svg {
       width: 0px;
       opacity: 0;

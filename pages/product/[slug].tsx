@@ -53,7 +53,9 @@ const Product = (props: any) => {
       <Box key={props.product.id}>
         <TopBanner title={product.Title} />
         <Box className={styles.container}>
-          <Gallery items={product.Gallery.data} />
+          <Gallery
+            items={[product.Featured_Image.data, ...product.Gallery.data]}
+          />
 
           <Box flex={1} w="">
             <Box display="flex" justifyContent={"space-between"}>
@@ -61,9 +63,7 @@ const Product = (props: any) => {
                 <Text fontWeight="600" fontSize="2xl">
                   {product.Title}
                 </Text>
-                <Text fontWeight="600" fontSize="sm">
-                  {product.Subtitle}
-                </Text>
+
                 <ReviewPreview
                   rating={product.Rating}
                   reviews={product.Reviews.data.length}

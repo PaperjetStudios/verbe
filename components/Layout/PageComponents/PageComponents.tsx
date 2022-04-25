@@ -14,6 +14,7 @@ import DetailsListing from "./components/Details/DetailsListing";
 import { getPageData } from "../../../data/layout/page-layout";
 import Featured from "./components/Featured/Featured";
 import SignUp from "./components/SignUp/SignUp";
+import TextBlock from "./components/TextBlock/TextBlock";
 
 type PageComponentsProps = {
   query: string;
@@ -41,6 +42,8 @@ const createLayout = (Layouts: any, slug: string) => {
         return <Featured key={slug + "-" + index} layout={layout} />;
       case "ComponentLayoutSignUp":
         return <SignUp key={slug + "-" + index} layout={layout} />;
+      case "ComponentLayoutText":
+        return <TextBlock key={slug + "-" + index} layout={layout} />;
       default:
         return null;
     }

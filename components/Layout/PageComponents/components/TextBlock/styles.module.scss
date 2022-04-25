@@ -1,1 +1,42 @@
 @import "../../../../../styles/globals.scss";
+
+.infoHolder {
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
+
+.text {
+ p {
+     margin-bottom:20px;
+    line-height: 1.6;
+ }
+
+ h1 {
+     font-weight: bold;
+     font-size: 40px;
+     text-transform: uppercase;
+     margin-bottom:40px;
+     position:relative;
+     &:before {
+         position:absolute;
+        bottom:-8px;
+         content: '';
+         width:10%;
+         height:4px;
+         background:#000;
+     }
+ }
+ ol {
+     li {
+         margin-bottom:15px;
+     }
+ }
+}
+
+.container2 {
+    padding:50px;
+}
+.mainImage {
+    width:50%
+}
