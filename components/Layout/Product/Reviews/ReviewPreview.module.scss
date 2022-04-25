@@ -1,0 +1,23 @@
+@import "../../../../styles/globals.scss";
+
+.container {
+  display: flex;
+  gap: 2px;
+  padding-top: 0px;
+  align-items: center;
+}
+
+.filledStar {
+  color: #ccc;
+  svg {
+    width: 15px;
+    height: 15px;
+  }
+}
+.emptyStar {
+  color: #feb53e;
+  svg {
+    width: 15px;
+    height: 15px;
+  }
+}

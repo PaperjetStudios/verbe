@@ -1,0 +1,62 @@
+@import "../../../../../styles/globals.scss";
+
+.container {
+  width: 100%;
+}
+
+.box {
+  @include shadow();
+  @include bobOnHover();
+  @include rounded();
+  @include bgDefault();
+
+  height: 400px;
+  position: relative;
+
+  .title {
+    @include textShadow();
+    color:#fff;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  .bottom {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    display:flex;
+    flex-direction: column;
+    gap:10px;
+  }
+
+  .cta {
+    background-color: #fff;
+    @include centeredFlex();
+    @include rounded();
+    gap: 5px;
+    svg {
+      width: 0px;
+      opacity: 0;
+      @include transition();
+    }
+
+    padding: 15px 30px;
+
+    span {
+      font-size: 14px;
+      font-weight: bold;
+      display: inline-block;
+    }
+  }
+
+  &:hover {
+    .cta {
+      svg {
+        width: 7px;
+        margin-left: 10px;
+        opacity: 1;
+      }
+    }
+  }
+}

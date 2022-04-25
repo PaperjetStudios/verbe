@@ -1,0 +1,10 @@
+@import "../../../../../styles/globals.scss";
+
+.container {
+  @include componentDefault();
+  @include darkener();
+}
+
+.heading {
+  @include textShadow();
+}

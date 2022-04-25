@@ -1,0 +1,22 @@
+.loaderContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loaderUncontained {
+  display: inline-block;
+}
+
+.loader_small {
+  font-size: 20px;
+}
+.loader_small {
+}
+.loader_medium {
+  padding: 20px;
+  svg {
+    width: 30px;
+    height: 30px;
+  }
+}

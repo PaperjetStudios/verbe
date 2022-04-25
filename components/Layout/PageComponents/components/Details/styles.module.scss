@@ -1,0 +1,12 @@
+@import "../../../../../styles/globals.scss";
+
+.container {
+  @include componentDefault();
+  @include innerWidth();
+}
+
+.icon {
+  svg {
+    height: 20px;
+  }
+}

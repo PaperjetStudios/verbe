@@ -1,0 +1,60 @@
+@import "../../../../../styles/globals.scss";
+
+.container {
+  width: 100%;
+}
+
+.featuredImage {
+  @include rounded();
+  @include bgDefault();
+}
+
+.box {
+  @include shadowOnHover();
+  @include bobOnHover();
+  @include rounded();
+  @include bgDefault();
+
+  position: relative;
+
+  .wishlist {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 2;
+    svg {
+      width: 20px;
+    }
+  }
+
+  .cta {
+    background-color: #fff;
+    @include centeredFlex();
+    @include rounded();
+    gap: 5px;
+    svg {
+      width: 0px;
+      opacity: 0;
+      @include transition();
+    }
+    position: absolute;
+    bottom: 0;
+    padding: 15px 30px;
+
+    span {
+      font-size: 14px;
+      font-weight: bold;
+      display: inline-block;
+    }
+  }
+
+  &:hover {
+    .cta {
+      svg {
+        width: 7px;
+        margin-left: 10px;
+        opacity: 1;
+      }
+    }
+  }
+}

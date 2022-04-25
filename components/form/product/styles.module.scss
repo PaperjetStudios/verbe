@@ -1,0 +1,14 @@
+@import "../../../styles/global.scss";
+
+.boxContainer {
+    display:flex;
+    gap:30px;
+    .main {
+        width:70%;
+    }
+    .sidebar {
+        width: 30%;
+        padding-left:30px;
+        border-left:1px solid #eee;
+    }
+}

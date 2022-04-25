@@ -1,0 +1,24 @@
+@import "../../styles/globals.scss";
+
+.container {
+  @include innerWidth();
+  display: flex;
+  gap: 50px;
+  padding-top: 70px;
+  padding-bottom: 50px;
+  .infoContainer {
+    gap: 5px;
+    line-height: 1.8;
+  }
+  .description {
+    ul {
+      list-style: none;
+    }
+  }
+}
+
+.sectionContainer {
+  @include innerWidth();
+
+  padding-bottom: 50px;
+}

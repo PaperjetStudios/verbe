@@ -1,0 +1,19 @@
+@import "../../../styles/globals.scss";
+
+
+.galleryContainer {
+  width: 50%;
+}
+.slider {
+  position: relative;
+}
+
+.slide {
+  z-index: 10;
+
+  justify-content: center;
+  align-items: center;
+  display: block;
+  background-position: center;
+  background-size: cover;
+}

@@ -1,0 +1,81 @@
+@import "../../../styles/globals.scss";
+
+.topBox {
+  width: 100%;
+  background-color: #2F2F2F;
+  color: #fff;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  p {
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .topButtons {
+    display: flex;
+    gap: 10px;
+    button {
+      border: 2px solid #fff;
+      border-radius: 20px;
+      padding: 6px 20px;
+      background-color: transparent;
+      color: #fff;
+      font-weight: 800;
+      font-size: 11px;
+      text-transform: uppercase;
+      @include transition();
+      &:hover {
+        color: #000;
+        background: #fff;
+      }
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      svg {
+        width: 12px;
+        margin-left: 7px;
+      }
+    }
+  }
+}
+
+.mainHeader {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom:1px solid #CCCCCC;
+  gap: 20px;
+  .logoAndMenuContainer {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    nav {
+      display: flex;
+      gap: 25px;
+      a {
+        color: #000;
+        font-size: 14px;
+        text-decoration: none;
+        @include transition();
+        &:hover {
+          opacity: 0.8;
+        }
+        &.sale {
+          color:#44D7B6 !important;
+        }
+      }
+    }
+  }
+}
+
+.sideMenu {
+  display:flex;
+}
+
+.logo {
+    width:160px;
+}

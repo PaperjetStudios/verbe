@@ -1,0 +1,30 @@
+@import "../../../styles/globals.scss";
+
+.container {
+  @include innerWidth();
+  @include componentDefault();
+  .footerMenuItem {
+    color: #666;
+    @include transition();
+    position: relative;
+    left: 0;
+    display: flex;
+    align-items: center;
+    svg {
+      @include transition();
+      width: 7px;
+      position: relative;
+      top: 1px;
+      left: 0;
+      opacity: 0;
+    }
+    &:hover {
+      svg {
+        opacity: 1;
+        width: 7px;
+        left: 10px;
+      }
+      left: 5px;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+@import "../../styles/globals.scss";
+.container {
+  padding: 50px;
+  background-color: #fff;
+  @include rounded();
+}
+.modalContainer {
+  padding: 20px 10px;
+}
+.categoryBlob {
+  border-radius: 100%;
+  @include bgDefault();
+  @include bobOnHover();
+  @include shadowOnHover();
+}

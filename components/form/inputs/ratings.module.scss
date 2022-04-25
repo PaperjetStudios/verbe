@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  gap: 2px;
+  padding-top: 10px;
+  align-items: center;
+}
+
+.filledStar {
+  background: #fff;
+  color: #ccc;
+  svg {
+    width: 15px;
+    height: 15px;
+  }
+}
+.emptyStar {
+  background: #fff;
+  color: #feb53e;
+  svg {
+    width: 15px;
+    height: 15px;
+  }
+}

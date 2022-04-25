@@ -1,0 +1,6 @@
+@import "../../../../../styles/globals.scss";
+
+.container {
+  @include innerWidth();
+  @include componentDefault();
+}

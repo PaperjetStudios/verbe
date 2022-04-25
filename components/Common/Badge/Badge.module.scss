@@ -1,0 +1,32 @@
+
+.badgeHolder {
+    position:relative;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    .badgeIcon {
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+      width:16px; height:16px;
+      border-radius: 100%;
+      background:#f00;
+      color:#fff;
+      font-size:10px;
+      font-weight:bold;
+      text-align: center;
+      bottom:5px;
+      right:5px;
+      z-index: 1;
+    }
+
+    &.large {
+      .badgeIcon {
+        font-size:14px;
+        width:24px; height:24px;
+        bottom:-3px;
+        right:-3px;
+      }
+    }
+  }

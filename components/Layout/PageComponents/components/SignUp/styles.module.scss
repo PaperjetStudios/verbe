@@ -1,0 +1,31 @@
+@import "../../../../../styles/globals.scss";
+.container {
+  @include bgDefault();
+
+  @include lightener();
+  
+}
+
+
+
+.inner {
+  height:20vw;
+  width:100%;
+  @include innerWidth();
+
+  
+
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  .info {
+    width:40%;
+    min-width:470px;
+
+    h2 {
+      letter-spacing: -0.05em;
+      font-size: 36px;
+      font-weight: bold;
+    }
+  }
+}

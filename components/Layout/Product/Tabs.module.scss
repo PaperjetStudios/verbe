@@ -1,0 +1,16 @@
+@import "../../../styles/globals.scss";
+
+.container {
+  @include innerWidth();
+}
+
+.infoHolder {
+  ul {
+    list-style:none;
+    font-size: 13px;
+  }
+  .fabric {
+    margin-bottom:20px;
+  }
+
+}

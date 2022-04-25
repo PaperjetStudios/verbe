@@ -1,0 +1,11 @@
+@import "../../../../../styles/global.scss";
+
+
+
+.nothingYet {
+    @include rounded();
+    @include shadow();
+
+    padding:40px;
+    text-align: center;
+}

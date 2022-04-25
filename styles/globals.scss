@@ -1,0 +1,106 @@
+$grey: #666666;
+
+@mixin desktop() {
+  @media (min-width: 1000px) {
+    @content;
+  }
+}
+
+@mixin mobile() {
+  @media (max-width: 999px) {
+    @content;
+  }
+}
+
+@mixin shadow() {
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+@mixin transition() {
+  transition: 0.2s all;
+}
+@mixin rounded() {
+  border-radius: 3px;
+}
+
+@mixin bgDefault() {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+@mixin centeredFlex() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin shadowOnHover() {
+  @include transition();
+  &:hover {
+    @include shadow();
+  }
+}
+
+@mixin textShadow() {
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+@mixin bobOnHover() {
+  @include transition();
+  transform-origin: center center;
+  transform: scale(1);
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+@mixin innerWidth() {
+  width: 100%;
+  max-width: 1170px;
+  margin: 0 auto;
+}
+
+@mixin innerWidth2() {
+  width: 100%;
+  max-width: 90vw;
+  margin: 0 auto;
+}
+
+@mixin componentDefault() {
+  padding-bottom: 30px;
+}
+
+@mixin beforeCoverElement() {
+  position: relative;
+  &:before {
+    content: " ";
+  }
+}
+
+@mixin lightener() {
+  &:before {
+    background: rgba(255, 255, 255, 0.4);
+  }
+}
+@mixin darkener() {
+  &:after {
+    content: "";
+    z-index: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.1);
+  }
+  * {
+    position: relative;
+    z-index: 5;
+  }
+}
+
+.chakra-button {
+  svg {
+    width: 17px;
+  }
+}

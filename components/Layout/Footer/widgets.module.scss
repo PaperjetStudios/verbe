@@ -1,0 +1,15 @@
+@import "../../../styles/globals.scss";
+
+.container {
+  @include innerWidth();
+  @include componentDefault();
+}
+.address {
+  li {
+  list-style: none;
+  font-size:12px;
+  margin-bottom:5px;
+  color:#666666;
+}
+margin-bottom:30px;
+}
