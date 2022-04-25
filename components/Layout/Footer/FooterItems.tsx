@@ -25,7 +25,7 @@ const FooterItems: React.FC<Props> = ({ items }) => {
               slug =
                 Page.data.attributes.slug === "home"
                   ? "/"
-                  : Page?.data.attributes.slug;
+                  : "/" + Page?.data.attributes.slug;
             } else {
               slug = createCategoryLink(Category?.data?.attributes.slug);
             }

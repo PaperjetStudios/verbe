@@ -86,7 +86,7 @@ export const getServerSideProps = async (context: any) => {
 
   return {
     props: {
-      category: category,
+      //category: category,
       pagination: list.data.products.meta.pagination,
     },
   };
