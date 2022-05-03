@@ -65,7 +65,6 @@ const Category = (props: any) => {
             <Filter />
           </Box>
           <Box py="10">
-            {slug}
             {!isFetching && <ProductGrid items={items} />}
             {isFetching && <Loader />}
           </Box>
@@ -82,7 +81,7 @@ const Category = (props: any) => {
 
 export const getServerSideProps = async (ctx: any) => {
   const queryClient = new QueryClient();
-  console.log(ctx.query.slug);
+
   const slug = ctx.query.slug;
 
   await queryClient.prefetchQuery(["category-data", slug], () =>
