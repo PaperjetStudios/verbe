@@ -30,8 +30,15 @@ const FooterItems: React.FC<Props> = ({ items }) => {
               slug = createCategoryLink(Category?.data?.attributes.slug);
             }
 
+            const nudeSlug = Category?.data?.attributes.slug;
+
             return (
-              <Link href={slug} key={item.Title + "-" + ind}>
+              <Link
+                href={slug}
+                // href={`/category/[slug]?slug=${nudeSlug}`}
+                // as={`/category/${nudeSlug}`}
+                key={item.Title + "-" + nudeSlug}
+              >
                 <a>
                   <Text className={styles.footerMenuItem} fontSize="12px">
                     <span>{item.Title}</span> {Icons.chevron.right}

@@ -1,8 +1,9 @@
-import { Box, HStack, Select } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { useAtom } from "jotai";
 import { useRouter } from "next/router";
-import { ReactElement, useEffect, useState } from "react";
-import { useQuery } from "react-query";
+import { useEffect, useState } from "react";
+import { dehydrate, QueryClient, useQuery } from "react-query";
+import ClientOnly from "../../components/Common/ClientOnly";
 import Filter from "../../components/Common/Filter/Filter";
 
 import Loader from "../../components/Common/Loader/Loader";
@@ -20,74 +21,82 @@ const perPage = 8;
 
 const Category = (props: any) => {
   const router = useRouter();
-  const { slug } = router.query;
-  const { pagination, list } = props;
+  const { slug } = props;
 
-  const { paginationSettings, setPagination } = usePagination(pagination);
+  //const { pagination, list } = props;
+
+  const { paginationSettings, setPagination } = usePagination();
 
   const [items, setItems] = useState<SingleProduct[]>([]);
-  const [curPage, setPage] = useState(pagination.page);
+  const [curPage, setPage] = useState(0);
 
   const [priceSort] = useAtom(PriceFilter);
   const [sizeFilter] = useAtom(SizeFilter);
 
-  const { data, isLoading, isFetching, refetch } = useQuery(
-    [`category-data`, slug],
+  const { data, isFetching, refetch } = useQuery(
+    [`category-products-data`, slug],
     () =>
       getProductsDataByCategorySlug(slug as string, curPage, perPage, {
         price: priceSort,
         size: sizeFilter,
         instock: true,
-      }),
-    {
-      enabled: false,
-    }
+      })
+  );
+
+  const { data: cat_data } = useQuery(["category-data", slug], () =>
+    getCategoryDataBySlug(slug as string)
   );
 
   useEffect(() => {
     const refetchQuery = async () => {
       const data = await refetch();
-      setItems(data.data.data.products.data);
-      const pagination = data.data.data.products.meta.pagination;
-      setPagination(pagination);
+      setItems(data?.data?.data?.products.data);
+      setPagination(data?.data?.data?.products?.meta?.pagination);
     };
 
     refetchQuery();
-  }, [curPage, refetch, priceSort, sizeFilter, slug]);
+  }, [curPage, refetch, priceSort, slug, sizeFilter, slug]);
 
   return (
-    <Box className={styles.greyBacking}>
-      <Box className={styles.container}>
-        <Box display="flex" justifyContent={"flex-end"}>
-          <Filter />
+    <ClientOnly>
+      <Box className={styles.greyBacking}>
+        <Box className={styles.container}>
+          <Box display="flex" justifyContent={"flex-end"}>
+            <Filter />
+          </Box>
+          <Box py="10">
+            {slug}
+            {!isFetching && <ProductGrid items={items} />}
+            {isFetching && <Loader />}
+          </Box>
+          <Pagination
+            page={curPage}
+            settings={paginationSettings}
+            setPage={setPage}
+          />
         </Box>
-        <Box py="10">
-          {!isFetching && <ProductGrid items={items} />}
-          {isFetching && <Loader />}
-        </Box>
-        <Pagination
-          page={curPage}
-          settings={paginationSettings}
-          setPage={setPage}
-        />
       </Box>
-    </Box>
+    </ClientOnly>
   );
 };
 
-export const getServerSideProps = async (context: any) => {
-  const category = await getCategoryDataBySlug(context.params.slug);
-  const list = await getProductsDataByCategorySlug(
-    context.params.slug,
-    1,
-    perPage,
-    { instock: true }
+export const getServerSideProps = async (ctx: any) => {
+  const queryClient = new QueryClient();
+  console.log(ctx.query.slug);
+  const slug = ctx.query.slug;
+
+  await queryClient.prefetchQuery(["category-data", slug], () =>
+    getCategoryDataBySlug(slug)
+  );
+
+  await queryClient.prefetchQuery(["category-products-data", slug], () =>
+    getProductsDataByCategorySlug(slug, 1, perPage, { instock: true })
   );
 
   return {
     props: {
-      //category: category,
-      pagination: list.data.products.meta.pagination,
+      slug: slug,
+      dehydratedState: dehydrate(queryClient),
     },
   };
 };

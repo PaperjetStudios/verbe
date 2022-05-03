@@ -72,6 +72,8 @@ export const getProductsDataByCategorySlug = async (
 ) => {
   const generatedFilters = makeFilterString(filters);
 
+  console.log("getProductsDataByCategorySlug", slug);
+
   const response = await client(null).query({
     query: FIND_PRODUCT_BY_CAT_SLUG(
       generatedFilters.filterString,
@@ -85,6 +87,7 @@ export const getProductsDataByCategorySlug = async (
     },
   });
 
+  console.log("getProductsDataByCategorySlug resp", response);
   return response as ProductProps;
 };
 

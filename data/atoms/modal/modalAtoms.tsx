@@ -19,18 +19,14 @@ const emptyStore = Object.entries(modal_keys).map((mod) => {
 
 export const Modals = atom<SingleModalProps[]>(emptyStore);
 
-const findModalIndexByName = (state: SingleModalProps[], name: string) => {
+export const findModalIndexByName = (
+  state: SingleModalProps[],
+  name: string
+) => {
   return _.findIndex(state, (mod) => {
     return mod.name === name;
   });
 };
-
-export const GetModal = (name: string) =>
-  atom((get) => {
-    const modals = get(Modals);
-    const index = findModalIndexByName(modals, name);
-    return modals[index];
-  });
 
 type toggleArgs = {
   name: string;
@@ -42,7 +38,9 @@ export const ToggleModal = atom(
   (get, set, args: toggleArgs) => {
     const { name, toggle } = args;
     let modals = get(Modals);
+    console.log("modals", modals);
     const index = findModalIndexByName(modals, name);
+    console.log("modals index", index);
 
     modals = produce(get(Modals), (draft) => {
       draft[index].isOpen = toggle;

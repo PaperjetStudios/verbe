@@ -1,13 +1,18 @@
+import { Text } from "@chakra-ui/react";
 import { useAtom } from "jotai";
 import Router from "next/router";
-import { GetModal, ToggleModal } from "../../data/atoms/modal/modalAtoms";
+import {
+  findModalIndexByName,
+  ToggleModal,
+} from "../../data/atoms/modal/modalAtoms";
 import modal_keys from "./keys";
 import ModalBase from "./ModalBase";
 
 const ModalLoginToContinue: React.FC = () => {
-  const [_, toggleModal] = useAtom(ToggleModal); //(modal_keys.login_to_continue);
-  const [modal] = useAtom(GetModal(modal_keys.login_to_continue)); //(modal_keys.login_to_continue);
+  const [modals, toggleModal] = useAtom(ToggleModal); //(modal_keys.login_to_continue);
 
+  const modal =
+    modals[findModalIndexByName(modals, modal_keys.login_to_continue)];
   return (
     <>
       <ModalBase

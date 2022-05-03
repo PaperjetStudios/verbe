@@ -18,6 +18,7 @@ const Pagination: React.FC<PaginationProps> = ({
   setPage,
 }) => {
   const { pageSize, total, pageCount } = settings;
+  console.log("pagination settings", settings);
   const totalPages = Math.ceil(total / pageSize);
 
   const selectHandler = (index: number, set: boolean = false) => {

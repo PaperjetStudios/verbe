@@ -4,7 +4,7 @@ import PageComponents from "../components/Layout/PageComponents/PageComponents";
 export default function PrivacyPolicy() {
   return (
     <InfoPage>
-      <PageComponents query="privacy-layout" slug="privacy-policy" />
+      <PageComponents query="layout" slug="privacy-policy" />
     </InfoPage>
   );
 }

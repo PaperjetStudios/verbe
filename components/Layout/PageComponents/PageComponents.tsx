@@ -53,7 +53,7 @@ const createLayout = (Layouts: any, slug: string) => {
 };
 
 const PageComponents: React.FC<PageComponentsProps> = ({ query, slug }) => {
-  const { data, isLoading } = useQuery(query, () => getPageData(slug));
+  const { data, isLoading } = useQuery([query, slug], () => getPageData(slug));
   const [layout, setLayout] = useState([]);
 
   const Page = data?.data.findPageBySlug.data.attributes;
@@ -65,6 +65,7 @@ const PageComponents: React.FC<PageComponentsProps> = ({ query, slug }) => {
   }, [data, Page]);
 
   if (isLoading) {
+    console.log("isloading");
     return <></>;
   }
 

@@ -50,10 +50,10 @@ const Footer = () => {
         )}
       </Grid>
       <CartDrawer />
+      <GlobalModals />
       {/*  <ChatWidget />
     
         <SearchModal />*/}
-      <GlobalModals />
     </>
   );
 };

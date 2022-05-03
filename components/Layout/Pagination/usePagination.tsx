@@ -26,7 +26,10 @@ export default function usePagination(
     });
 
   const setPagination = (paginationSettings: PaginationSettings) => {
-    setPaginationSettings(paginationSettings);
+    console.log("new paginations - ", paginationSettings);
+    if (paginationSettings) {
+      setPaginationSettings(paginationSettings);
+    }
   };
 
   return {
