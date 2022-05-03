@@ -15,8 +15,10 @@ export default async function userRoute(
 ) {
   const { user, jwt } = getParsedUserCookies(req);
 
+  console.log("Look at the user events");
+
   let newUser = { isLoggedIn: true, user: user };
-  console.log(newUser, jwt);
+
   if (jwt) {
     if (req.method === "POST") {
       try {
