@@ -6,9 +6,13 @@
     justify-content: center;
   }
   .spaceBetween {
+    position:relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @include respond(mobile) {
+      display:block;
+    }
   }
   .middled {
     display: flex;

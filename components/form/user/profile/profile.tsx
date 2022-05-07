@@ -17,7 +17,6 @@ type Props = {
 };
 
 const ProfileForm: React.FC<Props> = ({ buttonText = "Update" }) => {
-  //const [userData, setUserData] = useState(empty);
   const { user, userMutation } = useUser();
 
   const methods = useForm<FormType>({

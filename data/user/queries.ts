@@ -14,6 +14,7 @@ export const USER_FRAGMENT = gql`
           Street_Address_1
           Street_Address_2
           Suburb
+          Province
           City
           Country
           Zip_Code

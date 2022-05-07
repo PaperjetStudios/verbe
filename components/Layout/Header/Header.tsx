@@ -1,4 +1,4 @@
-import { Box, Text, IconButton, AlertIcon } from "@chakra-ui/react";
+import { Box, Text, IconButton, AlertIcon, Input } from "@chakra-ui/react";
 import Link from "next/link";
 
 import { useQuery } from "react-query";
@@ -19,6 +19,9 @@ import modal_keys from "../../Modal/keys";
 import Badge from "../../Common/Badge/Badge";
 import ScrollText from "./ScrollText/ScrollText";
 
+import Responsive from "../../Common/Responsive";
+import { toggleMobileMenu } from "../../../data/atoms/mobile-menu/mobile-menu";
+
 const Header = () => {
   const { user, isLoggedIn } = useUser();
 
@@ -26,15 +29,12 @@ const Header = () => {
   const [itemCount] = useAtom(CartCount);
   const [_, toggleModal] = useAtom(ToggleModal);
   const [modal, toggle] = useAtom(ToggleSearchModal);
+  const [mobileMenuShowing, toggleMenuShowing] = useAtom(toggleMobileMenu);
 
-  const { data: menuData, isLoading: menuLoading } = useQuery(
-    "main-menu",
-    getMainMenu
-  );
   const { data: optionsData, isLoading: optionsLoading } =
     useQuery<OptionDataType>("options", getOptionData);
 
-  if (menuLoading || optionsLoading) {
+  if (optionsLoading) {
     return <Loader />;
   }
 
@@ -47,31 +47,33 @@ const Header = () => {
           <Box>
             <Text fontWeight={"600"}>{options ? options.Notice : ""}</Text>
           </Box>
-          <Box className={styles.topButtons}>
-            {!isLoggedIn && (
-              <>
-                <Link href="/profile/login">
-                  <a>
-                    <button>Login {Icons.menu.user}</button>
-                  </a>
-                </Link>
-                <Link href="/profile/register">
-                  <a>
-                    <button>Register {Icons.menu.user}</button>
-                  </a>
-                </Link>
-              </>
-            )}
-            {isLoggedIn && (
-              <>
-                <Link href="/profile">
-                  <a>
-                    <button>Profile {Icons.menu.user}</button>
-                  </a>
-                </Link>
-              </>
-            )}
-          </Box>
+          <Responsive.Desktop>
+            <Box className={styles.topButtons}>
+              {!isLoggedIn && (
+                <>
+                  <Link href="/profile/login">
+                    <a>
+                      <button>Login {Icons.menu.user}</button>
+                    </a>
+                  </Link>
+                  <Link href="/profile/register">
+                    <a>
+                      <button>Register {Icons.menu.user}</button>
+                    </a>
+                  </Link>
+                </>
+              )}
+              {isLoggedIn && (
+                <>
+                  <Link href="/profile">
+                    <a>
+                      <button>Profile {Icons.menu.user}</button>
+                    </a>
+                  </Link>
+                </>
+              )}
+            </Box>
+          </Responsive.Desktop>
         </Box>
         <Box className={styles.mainHeader}>
           <Box className={styles.logoAndMenuContainer}>
@@ -84,42 +86,46 @@ const Header = () => {
                 />
               </a>
             </Link>
-            <Menu />
+            <Responsive.Desktop>
+              <Menu />
+            </Responsive.Desktop>
           </Box>
           <Box className={styles.sideMenu}>
-            <IconButton
-              onClick={() => toggle(true)}
-              aria-label="search"
-              size="lg"
-              variant="transparent"
-              icon={<>{Icons.search}</>}
-            />
-            {!isLoggedIn && (
+            <Responsive.Desktop>
               <IconButton
-                onClick={() =>
-                  toggleModal({
-                    name: modal_keys.login_to_continue,
-                    toggle: true,
-                  })
-                }
-                aria-label="wishlist"
+                onClick={() => toggle(true)}
+                aria-label="search"
                 size="lg"
                 variant="transparent"
-                icon={<>{Icons.heart}</>}
+                icon={<>{Icons.search}</>}
               />
-            )}
-            {isLoggedIn && (
-              <Link href="/wishlist">
-                <a>
-                  <IconButton
-                    aria-label="wishlist"
-                    size="lg"
-                    variant="transparent"
-                    icon={<>{Icons.heart}</>}
-                  />
-                </a>
-              </Link>
-            )}
+              {!isLoggedIn && (
+                <IconButton
+                  onClick={() =>
+                    toggleModal({
+                      name: modal_keys.login_to_continue,
+                      toggle: true,
+                    })
+                  }
+                  aria-label="wishlist"
+                  size="lg"
+                  variant="transparent"
+                  icon={<>{Icons.heart}</>}
+                />
+              )}
+              {isLoggedIn && (
+                <Link href="/wishlist">
+                  <a>
+                    <IconButton
+                      aria-label="wishlist"
+                      size="lg"
+                      variant="transparent"
+                      icon={<>{Icons.heart}</>}
+                    />
+                  </a>
+                </Link>
+              )}
+            </Responsive.Desktop>
 
             <Badge number={itemCount}>
               <IconButton
@@ -132,9 +138,25 @@ const Header = () => {
                 icon={<>{Icons.shoppingcart}</>}
               />
             </Badge>
+            <Responsive.Mobile>
+              <IconButton
+                aria-label="mobile"
+                size="lg"
+                variant="transparent"
+                onClick={() => {
+                  toggleMenuShowing(true);
+                }}
+                icon={<>{Icons.menu.bars}</>}
+              />
+            </Responsive.Mobile>
           </Box>
         </Box>
       </header>
+      <Responsive.Mobile>
+        <Box px={2} pb={4}>
+          <Input placeholder="Search..." name="search" />
+        </Box>
+      </Responsive.Mobile>
       <ScrollText />
     </>
   );

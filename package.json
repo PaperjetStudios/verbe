@@ -20,6 +20,7 @@
     "@fortawesome/pro-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
     "@hookform/resolvers": "^2.8.8",
+    "@react-hook/media-query": "^1.1.1",
     "apollo-upload-client": "^17.0.0",
     "axios": "^0.26.1",
     "framer-motion": "^6.3.1",

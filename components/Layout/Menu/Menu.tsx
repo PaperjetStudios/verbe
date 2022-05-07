@@ -5,6 +5,7 @@ import {
   MainMenuItemType,
 } from "../../../data/settings/main-menu";
 
+import styles from "./Menu.module.scss";
 import MenuItem from "./MenuItem";
 
 const Menu = () => {
@@ -20,7 +21,7 @@ const Menu = () => {
   const menu = menuData?.data.menu.data.attributes;
 
   return (
-    <nav>
+    <nav className={styles.container}>
       {menu?.Item.map((item: MainMenuItemType, index) => {
         return <MenuItem key={index} {...item} />;
       })}

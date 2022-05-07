@@ -8,12 +8,24 @@ import Step2Info from "./steps/step-2-info";
 import Step3Checkout from "./steps/step-3-payment";
 
 import styles from "./checkout.module.scss";
+import { axiosInstance } from "../../../config/api";
+import { SetCheckoutSettings } from "../../../data/atoms/checkout/checkoutAtoms";
+import { useAtom } from "jotai";
 
 type Props = {};
 
 const CheckoutBase: React.FC<Props> = () => {
+  const [_, setSettings] = useAtom(SetCheckoutSettings);
+
   useEffect(() => {
-    //resetCheckout();
+    axiosInstance()
+      .get("/orderutils/settings")
+      .then((res) => {
+        setSettings(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   return (

@@ -5,6 +5,9 @@
   @include componentDefault();
   padding-top: 30px;
   padding-bottom: 100px;
+  @include respond(mobile) {
+    padding-top:10px;
+  }
 
 }
 

@@ -6,6 +6,7 @@ export type FormType = {
   Street_Address_1: string;
   Street_Address_2: string;
   Suburb: string;
+  Province: string;
   City: string;
   Country: string;
   Zip_Code: string;
@@ -14,6 +15,7 @@ export type FormType = {
   create_profile_check: boolean;
   guestProfile: boolean;
   addressRequired: boolean;
+  communications: boolean;
 };
 
 export const empty = {
@@ -24,6 +26,7 @@ export const empty = {
   Street_Address_1: "",
   Street_Address_2: "",
   Suburb: "",
+  Province: "",
   City: "",
   Country: "",
   Zip_Code: "",
@@ -32,4 +35,5 @@ export const empty = {
   create_profile_check: true,
   guestProfile: true,
   addressRequired: false,
+  communications: true,
 };

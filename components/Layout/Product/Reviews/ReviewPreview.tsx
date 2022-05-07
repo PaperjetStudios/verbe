@@ -48,7 +48,12 @@ const ReviewPreview: React.FC<ReviewPreviewProps> = ({
     <Box className={styles.container}>
       {elements}
       {!hideReviews && reviews && (
-        <Text pl={2} fontWeight="bold" fontSize="xs" color="#ccc">
+        <Text
+          pl={[0, null, null, 2]}
+          fontWeight="bold"
+          fontSize="xs"
+          color="#ccc"
+        >
           ({reviews} Reviews)
         </Text>
       )}

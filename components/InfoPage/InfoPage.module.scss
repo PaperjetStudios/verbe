@@ -2,6 +2,7 @@
 .container {
     @include innerWidth();
     padding:50px 0;
+    
 }
 
 .greyBacking {
@@ -11,6 +12,9 @@
 .info {
     @include rounded();
     padding:0px 50px;
+    @include respond(mobile) {
+        padding:10px 10px;
+    }
     background:#fff;
 
 }

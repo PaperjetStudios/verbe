@@ -46,6 +46,7 @@ const Quantity: React.FC<QuantityProps> = ({
         onClick={() => setQuantityHandler(undefined, -1)}
       />
       <Input
+        padding={0}
         value={quantity}
         onChange={(e) => setQuantityHandler(e.currentTarget.value)}
         type="number"

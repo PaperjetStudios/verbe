@@ -1,16 +1,20 @@
 import { Box, Select, Text } from "@chakra-ui/react";
 import React, { Component } from "react";
 import { SingleVariation } from "../../../data/products/types";
+import Responsive from "../../Common/Responsive";
 
 import styles from "./Variation.module.scss";
+import Wishlist from "./Wishlist";
 
 type VariationProps = {
   variations: SingleVariation[];
   onChange: (e) => void;
   value: number;
+  id: string | number;
 };
 
 const Variation: React.FC<VariationProps> = ({
+  id,
   variations,
   value,
   onChange,
@@ -34,6 +38,10 @@ const Variation: React.FC<VariationProps> = ({
           );
         })}
       </Select>
+
+      <Responsive.Mobile>
+        <Wishlist id={id} />
+      </Responsive.Mobile>
     </Box>
   );
 };

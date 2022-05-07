@@ -34,6 +34,8 @@ import ReactMarkdown from "react-markdown";
 import Variation from "../../components/Layout/Product/Variation";
 import ReviewPreview from "../../components/Layout/Product/Reviews/ReviewPreview";
 
+import Responsive from "../../components/Common/Responsive";
+
 const Product = (props: any) => {
   const [currentVariation, setVariation] = useState(0);
 
@@ -42,8 +44,6 @@ const Product = (props: any) => {
   const product = props.product.attributes as SingleProductAttributes;
 
   const variation = product.Variation[currentVariation];
-
-  console.log(variation);
 
   const [items, update] = useAtom(updateCart);
   const [_, toggleModal] = useAtom(ToggleModal);
@@ -57,7 +57,7 @@ const Product = (props: any) => {
             items={[product.Featured_Image.data, ...product.Gallery.data]}
           />
 
-          <Box flex={1} w="">
+          <Box flex={1} p={["30px", null, null, 0]}>
             <Box display="flex" justifyContent={"space-between"}>
               <Box>
                 <Text fontWeight="600" fontSize="2xl">
@@ -93,10 +93,11 @@ const Product = (props: any) => {
               value={currentVariation}
               onChange={setVariation}
               variations={product.Variation}
+              id={props.product.id}
             />
             <Divider mt={6} mb={6} />
 
-            <>
+            <Responsive.Desktop>
               <Box display="flex" gap={5} key="quantity">
                 {variation.Quantity > 0 && (
                   <>
@@ -105,6 +106,7 @@ const Product = (props: any) => {
                       setQuantity={setQuantity}
                       variation={product.Variation[0]}
                     />
+
                     <Button
                       onClick={() => {
                         update({
@@ -134,9 +136,46 @@ const Product = (props: any) => {
                 )}
                 <Wishlist id={props.product.id} />
               </Box>
-
               <Divider mt={6} mb={6} />
-            </>
+            </Responsive.Desktop>
+
+            <Responsive.Mobile>
+              <Box
+                display="flex"
+                bg="#fff"
+                justifyContent={"space-between"}
+                p="3"
+                gap={4}
+                position={"fixed"}
+                bottom={0}
+                left={0}
+                right={0}
+                zIndex={1000}
+              >
+                <Quantity
+                  quantity={quantity}
+                  setQuantity={setQuantity}
+                  variation={product.Variation[0]}
+                />
+
+                <Button
+                  onClick={() => {
+                    update({
+                      product: {
+                        data: props.product,
+                      },
+                      quantityValue: quantity,
+                      variationValue: currentVariation,
+                      showCartAfter: true,
+                    });
+                  }}
+                  leftIcon={Icons.shoppingcart}
+                  variant="main"
+                >
+                  Add to Cart
+                </Button>
+              </Box>
+            </Responsive.Mobile>
 
             <Stack key="info">
               <Text key="availability" color="#555" fontSize={"sm"}>
@@ -151,6 +190,12 @@ const Product = (props: any) => {
                 SKU:{" "}
                 <Text as="span" color="#111" display={"inline-block"}>
                   {product.SKU}
+                </Text>
+              </Text>
+              <Text key="colour" color="#555" fontSize={"sm"}>
+                Colour:{" "}
+                <Text as="span" color="#111" display={"inline-block"}>
+                  {product.Colour}
                 </Text>
               </Text>
               <Text key="categories_list" color="#555" fontSize={"sm"}>
@@ -215,14 +260,18 @@ const Product = (props: any) => {
           </Box>
         </Box>
 
-        <HStack alignItems={"flex-start"} className={styles.sectionContainer}>
+        <HStack
+          w="100%"
+          alignItems={"flex-start"}
+          className={styles.sectionContainer}
+        >
           <ProductTabs productData={product} id={props.product.id} />
         </HStack>
         <Box className={styles.sectionContainer}>
           <Text fontWeight="bold" mb={8} fontSize="3xl" textAlign="center">
             Similar Products
           </Text>
-          <ProductGrid items={props.similar} />
+          <ProductGrid swipable={false} items={props.similar} />
         </Box>
       </Box>
     </>

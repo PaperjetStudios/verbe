@@ -3,6 +3,9 @@
   padding: 50px;
   background-color: #fff;
   @include rounded();
+  @include respond(mobile) {
+    padding:30px;
+  }
 }
 .modalContainer {
   padding: 20px 10px;

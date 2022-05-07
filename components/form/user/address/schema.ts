@@ -16,6 +16,7 @@ export const emptyAddressObject = {
 export const schema = yup.object().shape({
   Street_Address_1: yup.string().required("Street Address 1 is required"),
   Suburb: yup.string().required("Suburb is required"),
+  Province: yup.string().required("Province is required"),
   City: yup.string().required("City is required"),
   Country: yup.string().required("Country is required"),
   Zip_Code: yup.string().required("Zip Code is required"),

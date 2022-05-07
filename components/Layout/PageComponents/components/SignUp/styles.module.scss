@@ -3,6 +3,10 @@
   @include bgDefault();
 
   @include lightener();
+
+  @include respond(mobile) {
+    padding:20px 0;
+  }
   
 }
 
@@ -13,7 +17,15 @@
   width:100%;
   @include innerWidth();
 
-  
+  @include respond(mobile) {
+    height:auto;
+    width:90%;
+    margin:20px auto;
+    padding:25px;
+    background:rgba(255,255,255,1);
+    @include shadow();
+    @include rounded();
+  }
 
   display:flex;
   flex-direction: row;
@@ -21,11 +33,20 @@
   .info {
     width:40%;
     min-width:470px;
+    @include respond(mobile) {
+      min-width:0;
+      width:100%;
+    }
+  
 
     h2 {
       letter-spacing: -0.05em;
       font-size: 36px;
       font-weight: bold;
+      @include respond(mobile) {
+        line-height: 1.2em;
+        font-size: 28px;
+      }
     }
   }
 }

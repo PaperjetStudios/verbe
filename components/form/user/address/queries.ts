@@ -9,6 +9,7 @@ export const EDIT_USER_ADDRESS = gql`
             Street_Address_1
             Street_Address_2
             Suburb
+            Province
             City
             Country
             Zip_Code
@@ -29,6 +30,7 @@ export const GET_USER_ADDRESSES = gql`
             Street_Address_2
             Suburb
             City
+            Province
             Country
             Zip_Code
           }

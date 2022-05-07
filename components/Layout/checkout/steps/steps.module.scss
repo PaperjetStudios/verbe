@@ -5,6 +5,9 @@
   @include shadow();
   background: #fff;
   padding: 30px 30px;
+  @include respond(mobile) {
+    padding:15px;
+  }
 }
 .stepper {
   display: flex;
@@ -12,5 +15,9 @@
   align-items: center;
   max-width: 80%;
   padding: 50px 0px;
+  @include respond(mobile) {
+    padding:15px 0;
+    max-width: 95%;
+  }
   margin: 0 auto;
 }

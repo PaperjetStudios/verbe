@@ -40,7 +40,10 @@ const FooterItems: React.FC<Props> = ({ items }) => {
                 key={item.Title + "-" + nudeSlug}
               >
                 <a>
-                  <Text className={styles.footerMenuItem} fontSize="12px">
+                  <Text
+                    className={styles.footerMenuItem}
+                    fontSize={["14px", null, null, "12px"]}
+                  >
                     <span>{item.Title}</span> {Icons.chevron.right}
                   </Text>
                 </a>

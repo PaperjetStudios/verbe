@@ -6,7 +6,6 @@ import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { useWizard } from "react-use-wizard";
 import { unlockStep } from "../../../../data/atoms/cart/cartAtoms";
 import {
-  AddressRequired,
   GuestCheckout,
   SetAddress,
 } from "../../../../data/atoms/checkout/checkoutAtoms";
@@ -60,9 +59,7 @@ const Step2Cart: React.FC = () => {
       }
 
       if (goAhead) {
-        //if (unlockedSteps <= 2) {
         unlock(3);
-        //}
         nextStep();
       }
     }
@@ -71,7 +68,7 @@ const Step2Cart: React.FC = () => {
   return (
     <StepBase handleCurrentStep={handleCurrentStep}>
       <Text pb={5} fontWeight="bold" fontSize={"xl"}>
-        {isLoggedIn ? "Your Information" : "Please Sign Up"}
+        {isLoggedIn ? "Your Information" : "Your Information"}
       </Text>
       <Divider />
       <Box pt={5}>
@@ -85,7 +82,6 @@ const Step2Cart: React.FC = () => {
         {isLoggedIn && (
           <>
             <ProfileForm buttonText="update" />
-
             <>
               <Text pt={5} pb={5} fontWeight="bold" fontSize={"xl"}>
                 Your Address

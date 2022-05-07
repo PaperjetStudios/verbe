@@ -2,10 +2,11 @@ import produce from "immer";
 import { atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 import _ from "lodash";
-import { parseAsInt } from "../../../config/util";
-import { SingleProduct } from "../../products/types";
+import { parseAsFloat, parseAsInt } from "../../../config/util";
+import { SingleCartProduct, SingleProduct } from "../../products/types";
 
-import { AddressRequiredBool } from "../checkout/checkoutAtoms";
+import { CheckoutSettings } from "../checkout/checkoutAtoms";
+import { CouponAtom, SetCoupon } from "../coupon/couponAtoms";
 
 import { CartItem, CartItems, emptyTotals, Totals } from "./types";
 
@@ -15,14 +16,14 @@ export const Items = atomWithStorage<CartItems>("cart", []);
 export const clearCart = atom(
   (get) => get(Items),
   (get, set, data: any) => {
-    set(AddressRequiredBool, false);
+    set(CouponAtom, null);
     set(Items, []);
-    set(Total, calculateTotals([]));
+    set(Total, calculateTotals([], get(CheckoutSettings), get(CouponAtom)));
   }
 );
 
 type UpdateCartProps = {
-  product: { data: SingleProduct };
+  product: { data: SingleCartProduct };
   quantityValue: number;
   variationValue: number;
   showCartAfter: boolean;
@@ -61,13 +62,26 @@ export const updateCart = atom(
       }
       // Create new Product Data
       const newProductData = {
-        Product: product,
+        Product: {
+          data: {
+            id: product.data.id,
+            attributes: _.omit(product.data.attributes, [
+              "__typename",
+              "Rating",
+              "Gallery",
+              "Reviews",
+              "SizeGuide",
+              "Categories",
+              "RatingTotal",
+              "FabricContent",
+              "WashcareInstructions",
+            ]),
+          } as SingleCartProduct,
+        },
         Variation: variationValue,
         Quantity: finalQuantity,
         Extra: null,
       };
-
-      // Set initial Delivery Method as Pickup
 
       // if there is an existing product, update it, if not, add a new one
       Cart = produce(Cart, (draft) => {
@@ -90,8 +104,9 @@ export const updateCart = atom(
       toggleDrawerFunction(get, set, true);
       //  set(cartDrawerShowing, true);
     }
+
     set(Items, Cart);
-    set(Total, calculateTotals(Cart));
+    set(Total, calculateTotals(Cart, get(CheckoutSettings), get(SetCoupon)));
   }
 );
 
@@ -112,7 +127,7 @@ export const updateItemQuantity = atom(
       draft[product].Quantity = quantity;
     });
     set(Items, Cart);
-    set(Total, calculateTotals(Cart));
+    set(Total, calculateTotals(Cart, get(CheckoutSettings), get(SetCoupon)));
   }
 );
 
@@ -138,8 +153,12 @@ export const removeItem = atom(
       draft.splice(product, 1);
     });
 
+    if (Cart.length === 0) {
+      toggleDrawerFunction(get, set, false);
+    }
+
     set(Items, Cart);
-    set(Total, calculateTotals(Cart));
+    set(Total, calculateTotals(Cart, get(CheckoutSettings), get(SetCoupon)));
   }
 );
 
@@ -180,23 +199,48 @@ export const unlockStep = atom(
 /// TOTALS
 export const Total = atomWithStorage<Totals>("cart_totals", emptyTotals);
 
-export const calculateTotals = (items) => {
+export const calculateTotals = (items, checkoutSettings, coupon) => {
   let totals: Totals = {
     total_items: 0,
     delivery: 0,
     vat: 0,
     total: 0,
+    discount: 0,
   };
+
+  const { settings } = checkoutSettings;
 
   items.forEach((item) => {
     const productPrice =
       item.Quantity * parseAsInt(item.Product.data.attributes.Price);
 
     totals.total_items = totals.total_items + productPrice;
-
     totals.total = totals.total + productPrice;
   });
-  const deliveryPrice = 0; // TODO ADD IN
+
+  // Coupons
+  let discount = 0;
+  if (coupon) {
+    const { Type, Discount } = coupon;
+
+    if (Type === "Percentage") {
+      discount = (totals.total * Discount) / 100;
+      totals.total = totals.total - discount;
+    } else {
+      discount = parseAsFloat(Discount);
+      totals.total = totals.total - discount;
+    }
+  }
+  totals.discount = discount;
+
+  // Delivery
+  let deliveryPrice = parseAsFloat(settings.settings.shipping_cost);
+  if (settings.settings.free_shipping_enabled) {
+    if (totals.total >= parseAsFloat(settings.settings.free_shipping_limit)) {
+      deliveryPrice = 0;
+    }
+  }
+
   totals.delivery = totals.delivery + deliveryPrice;
   totals.total = totals.total + deliveryPrice;
 

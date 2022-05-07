@@ -5,7 +5,10 @@ import { ReactElement, useState } from "react";
 import cs from "../../../config/cs";
 import { Icons } from "../../Common/icons";
 
+import Responsive from "../../Common/Responsive";
+
 import styles from "./Holder.module.scss";
+import MobileMenu from "./MobileMenu/MobileMenu";
 
 export type SideAction = {
   action: () => void;
@@ -70,49 +73,55 @@ const Holder: React.FC<HolderLayoutProps> = ({
 
   return (
     <Box className={styles.container}>
-      <Box className={styles.sideBar}>
-        <Text as="h4">{sidebarTitle}</Text>
+      <Responsive.Desktop>
+        <Box className={styles.sideBar}>
+          <Text as="h4">{sidebarTitle}</Text>
 
-        <Divider pt={4} />
-        <Box my="5" className={styles.menuItems}>
-          {menuItems.map((item, index) => (
-            <Box
-              onClick={() => {
-                router.push(item.link);
-              }}
-              key={"menu_" + index}
-              className={cs(styles.menuItem, {
-                [styles.currentMenuItem]: currentPath === item.link,
-              })}
-            >
-              <Text as="span">{item.label}</Text>
-              {Icons.chevron.right}
-            </Box>
-          ))}
+          <Divider pt={4} />
+          <Box my="5" className={styles.menuItems}>
+            {menuItems.map((item, index) => (
+              <Box
+                onClick={() => {
+                  router.push(item.link);
+                }}
+                key={"menu_" + index}
+                className={cs(styles.menuItem, {
+                  [styles.currentMenuItem]: currentPath === item.link,
+                })}
+              >
+                <Text as="span">{item.label}</Text>
+                {Icons.chevron.right}
+              </Box>
+            ))}
+          </Box>
         </Box>
-      </Box>
+      </Responsive.Desktop>
+
       <Box className={styles.content}>
         <Box className={styles.topHolder}>
           <Text fontWeight={600} fontSize={22}>
             {title}
           </Text>
-          {actions && (
-            <Box>
-              {actions.map((action, index) => (
-                <Button
-                  key={"action_" + index}
-                  onClick={action.action}
-                  variant="outline"
-                  size="sm"
-                >
-                  {action.title}
-                </Button>
-              ))}
-            </Box>
-          )}
-          {buttons && <Box>{buttons}</Box>}
-        </Box>
 
+          <Box>
+            <Responsive.Mobile>
+              <MobileMenu {...typeProps} />
+            </Responsive.Mobile>
+
+            {actions?.map((action, index) => (
+              <Button
+                key={"action_" + index}
+                onClick={action.action}
+                variant="outline"
+                size="sm"
+              >
+                {action.title}
+              </Button>
+            ))}
+
+            {buttons && <Box>{buttons}</Box>}
+          </Box>
+        </Box>
         <Divider pt={5} />
         <Box pt={5}>{content}</Box>
       </Box>

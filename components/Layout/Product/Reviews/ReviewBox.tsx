@@ -72,7 +72,7 @@ const ReviewBox: React.FC<ReviewBoxProps> = ({
           reviews={reviews}
           id={id}
           type={type}
-          extraProps={{ mt: 8 }}
+          extraProps={{ mt: [5, null, null, 8] }}
         ></ReviewWrite>
       )}
     </>

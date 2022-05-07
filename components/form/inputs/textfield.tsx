@@ -13,6 +13,7 @@ type TextFieldProps = {
   name: string;
   password?: boolean;
   textarea?: boolean;
+  size?: string;
 };
 
 const TextField: React.FC<TextFieldProps> = ({
@@ -21,6 +22,7 @@ const TextField: React.FC<TextFieldProps> = ({
   placeholder,
   password = false,
   textarea = false,
+  size = "md",
 }) => {
   const methods = useFormContext();
   const errors = methods.formState.errors;
@@ -29,11 +31,16 @@ const TextField: React.FC<TextFieldProps> = ({
 
   return (
     <FormControl isInvalid={errors[name]}>
-      <FormLabel htmlFor={name}>{label}</FormLabel>
+      {label !== "" && <FormLabel htmlFor={name}>{label}</FormLabel>}
       {!textarea && (
         <Input
+          border="none"
+          borderBottom="1px solid #efefef"
+          rounded="none"
           type={type}
           id={name}
+          px={size === "sm" ? "sm" : 2}
+          fontSize={size}
           placeholder={placeholder}
           {...methods.register(name)}
         />

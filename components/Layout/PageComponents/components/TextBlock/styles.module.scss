@@ -36,6 +36,9 @@
 
 .container2 {
     padding:50px;
+    @include respond(mobile) {
+        padding:20px;
+    }
 }
 .mainImage {
     width:50%

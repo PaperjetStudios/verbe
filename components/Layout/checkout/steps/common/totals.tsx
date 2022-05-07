@@ -3,6 +3,7 @@ import { useAtom } from "jotai";
 import { useWizard } from "react-use-wizard";
 import { moneyFormatter } from "../../../../../config/util";
 import { Total } from "../../../../../data/atoms/cart/cartAtoms";
+import { SetCoupon } from "../../../../../data/atoms/coupon/couponAtoms";
 import { Icons } from "../../../../Common/icons";
 
 type ListItemProps = {
@@ -11,14 +12,16 @@ type ListItemProps = {
   currency?: boolean;
   bigger?: boolean;
   wallet?: boolean;
+  ifZero?: string;
 };
 const TotalListItem: React.FC<ListItemProps> = ({
   label,
   total,
   currency = true,
   bigger = false,
+  ifZero = null,
 }) => {
-  if (total === 0 && !bigger) {
+  if (total === 0 && !bigger && !ifZero) {
     return null;
   } else {
     return (
@@ -30,7 +33,7 @@ const TotalListItem: React.FC<ListItemProps> = ({
           fontSize={bigger ? "md" : "sm"}
           fontWeight={bigger ? "600" : "400"}
         >
-          {currency ? moneyFormatter(total) : total}
+          {currency ? (total > 0 ? moneyFormatter(total) : ifZero) : total}
         </Text>
       </HStack>
     );
@@ -44,6 +47,7 @@ type TotalsProps = {
 
 const Totals: React.FC<TotalsProps> = ({ nextAction, disableNext = false }) => {
   const [totals] = useAtom(Total);
+  const [coupon] = useAtom(SetCoupon);
 
   const { nextStep, isLastStep, activeStep } = useWizard();
 
@@ -60,7 +64,22 @@ const Totals: React.FC<TotalsProps> = ({ nextAction, disableNext = false }) => {
       <Divider my={5} />
       <Stack>
         <TotalListItem label="Items" total={totals.total_items} />
-        <TotalListItem label="Delivery" total={totals.delivery} />
+        <TotalListItem
+          label="Delivery"
+          total={totals.delivery}
+          ifZero="Free Shipping"
+        />
+        {coupon && (
+          <TotalListItem
+            currency={false}
+            label={`Coupon: ${coupon.Code}`}
+            total={`- ${
+              coupon.Type === "Fixed"
+                ? moneyFormatter(coupon.Discount)
+                : `${coupon.Discount}%`
+            }`}
+          />
+        )}
         <TotalListItem label="Vat" total={totals.vat} />
       </Stack>
 

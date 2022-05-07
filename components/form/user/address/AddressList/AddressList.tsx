@@ -66,7 +66,12 @@ const AddressList: React.FC<Props> = ({ children, className, style }) => {
       )}
       {userData?.Address?.length > 0 && (
         <>
-          <Box display="grid" gap={5} pb={5} gridTemplateColumns="1fr 1fr 1fr">
+          <Box
+            display="grid"
+            gap={5}
+            pb={5}
+            gridTemplateColumns={["1fr", "1fr 1fr", null, "1fr 1fr 1fr"]}
+          >
             {userData.Address.map((address, index) => {
               return (
                 <AddressListItem key={index} address={address} ind={index} />

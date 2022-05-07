@@ -1,6 +1,8 @@
+import { Box } from "@chakra-ui/react";
 import Link from "next/link";
 import { createCategoryLink } from "../../../config/util";
 import { MainMenuItemType } from "../../../data/settings/main-menu";
+import styles from "./Menu.module.scss";
 
 const MenuItem: React.FC<MainMenuItemType> = (item) => {
   const page = item.Page.data;
@@ -14,9 +16,11 @@ const MenuItem: React.FC<MainMenuItemType> = (item) => {
   }
 
   return (
-    <Link href={`${slug}`}>
-      <a className={extraClass}>{`${item.Title}`}</a>
-    </Link>
+    <Box className={styles.menuItem}>
+      <Link href={`${slug}`}>
+        <a className={extraClass}>{`${item.Title}`}</a>
+      </Link>
+    </Box>
   );
 };
 

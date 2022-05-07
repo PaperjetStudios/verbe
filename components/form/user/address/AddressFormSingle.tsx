@@ -71,6 +71,7 @@ const AddressFormSingle: React.FC<Props> = ({ callback, id = -1 }) => {
               placeholder="Street Address Line 2"
             />
             <TextField name="Suburb" label="Suburb" placeholder="Suburb" />
+            <TextField name="Province" label="Provice" placeholder="Province" />
             <TextField name="City" label="City" placeholder="City" />
             <TextField name="Country" label="Country" placeholder="Country" />
             <TextField

@@ -3,6 +3,9 @@
 
 .galleryContainer {
   width: 50%;
+  @include respond(mobile) {
+    width:100%;
+  }
 }
 .slider {
   position: relative;

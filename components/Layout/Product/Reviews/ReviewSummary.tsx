@@ -42,14 +42,20 @@ const ReviewSummary: React.FC<ReviewSummaryProps> = ({
   }
   return (
     <>
-      <HStack pt={5} spacing={10} className={styles.container}>
-        <Stack w="30%" spacing={3}>
+      <HStack
+        flexDir={["column-reverse", "column-reverse", "row", "row"]}
+        pt={5}
+        spacing={[0, null, null, 10]}
+        className={styles.container}
+      >
+        <Stack w={["100%", null, null, "30%"]} spacing={3}>
           {_.reverse(ratingElements)}
         </Stack>
-        <Stack w="30%">
+        <Stack w={["100%", null, null, "30%"]}>
           <Stack
             spacing={0}
-            p={6}
+            p={[3, null, null, 6]}
+            mb={[5, 0]}
             border={"1px solid #eee"}
             justifyContent="center"
             alignItems={"center"}

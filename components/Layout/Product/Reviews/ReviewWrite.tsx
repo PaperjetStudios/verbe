@@ -32,6 +32,7 @@ const ReviewWrite: React.FC<ReviewSummaryProps> = ({
   if (!isLoggedIn) {
     return (
       <Button
+        w={["100%", null, null, "auto"]}
         onClick={() => {
           toggleModal({ name: modal_keys.login_to_continue, toggle: true });
         }}
@@ -45,7 +46,12 @@ const ReviewWrite: React.FC<ReviewSummaryProps> = ({
 
   return (
     <>
-      <Button {...extraProps} onClick={modal.onOpen} variant="main">
+      <Button
+        w={["100%", null, null, "auto"]}
+        {...extraProps}
+        onClick={modal.onOpen}
+        variant="main"
+      >
         Write a Review
       </Button>
       <ModalBase

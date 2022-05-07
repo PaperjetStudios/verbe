@@ -19,7 +19,13 @@ const CategoryListing: React.FC<Props> = ({ layout }) => {
   return (
     <Box className={styles.greyBacking}>
       <Box className={styles.container}>
-        <Flex px="20%" align="center" justify="space-between" gap={8}>
+        <Flex
+          px={["10px", null, null, "5%"]}
+          align="center"
+          flexDir={["column", "column", "column", "row"]}
+          justify="space-between"
+          gap={8}
+        >
           {layout.Item.map((feature, ind) => {
             return (
               <FeaturedCard key={layout.id + "-" + ind} feature={feature} />

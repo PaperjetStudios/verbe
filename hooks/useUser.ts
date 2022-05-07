@@ -57,11 +57,13 @@ export default function useUser() {
     loginMutation.mutate(loginInfo, {
       onError: (err) => {
         onFail();
+        console.log(err);
       },
       onSuccess: (data) => {
         queryClient.setQueryData("user", {
           data: { isLoggedIn: true, ...data.data },
         });
+        console.log(data);
         setUser({ isLoggedIn: true, ...data.data });
         onSuccess();
       },

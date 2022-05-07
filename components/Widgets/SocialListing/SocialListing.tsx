@@ -58,7 +58,11 @@ const SocialListing: React.FC<Props> = () => {
       );
     }
   );
-  return <Flex gap={2}>{socialLinks}</Flex>;
+  return (
+    <Flex gap={2} my={["10px", null, null, "0"]}>
+      {socialLinks}
+    </Flex>
+  );
 };
 
 export default SocialListing;

@@ -147,3 +147,13 @@ export const parseAsFloat = (number: any) => {
 export function inRange(x: number, min: number, max: number) {
   return (x - min) * (x - max) <= 0;
 }
+
+export function convertToAmount(amount: number | string) {
+  if (amount) {
+    if (typeof amount === "string") {
+      return parseFloat(amount).toFixed(2);
+    } else {
+      return amount.toFixed(2);
+    }
+  }
+}

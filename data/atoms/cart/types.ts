@@ -1,11 +1,12 @@
 import { boolean } from "yup";
-import { SingleProduct } from "../../products/types";
+import { SingleCartProduct, SingleProduct } from "../../products/types";
 
 export type Totals = {
   total_items: number;
   delivery: number;
   vat: number;
   total: number;
+  discount: number;
 };
 
 export const emptyTotals = {
@@ -13,6 +14,7 @@ export const emptyTotals = {
   total: 0,
   delivery: 0,
   vat: 0,
+  discount: 0,
 };
 export type StoreAddress = {
   Street_Address_1: string;
@@ -25,7 +27,7 @@ export type StoreAddress = {
 
 export type CartItem = {
   Product: {
-    data: SingleProduct;
+    data: SingleCartProduct;
   };
   Variation: number;
   Quantity: number;

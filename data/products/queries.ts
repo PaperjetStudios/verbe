@@ -17,9 +17,16 @@ export const PRODUCT_FRAGMENT = gql`
       Description
       FabricContent
       WashcareInstructions
+      Colour
       Variation {
         Quantity
         Size
+      }
+      SizeGuide {
+        Title
+        SizeValue {
+          Value
+        }
       }
       Price
       SKU

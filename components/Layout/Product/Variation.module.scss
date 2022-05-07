@@ -1,4 +1,4 @@
-
+@import "../../../styles/globals.scss";
 
 .container {
 
@@ -6,6 +6,10 @@
     gap:20px;
     align-items: center;
     width:30%;
+    @include respond(mobile) {
+        width:100%;
+    }
+
     .select {
        
     }

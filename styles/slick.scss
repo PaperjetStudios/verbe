@@ -127,4 +127,10 @@
   &.slick-next {
     right: 30px;
   }
+
+  @include respond(mobile) {
+      top:auto;
+      bottom:20px;
+      
+  }
 }

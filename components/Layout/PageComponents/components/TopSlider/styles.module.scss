@@ -17,19 +17,41 @@
   display: flex;
   background-position: center;
   background-size: cover;
+  @include respond(mobile) {
+    height: 35vw;
+    padding:0;
+  }
 }
 
 .titleBox {
   padding: 50px 50px 30px;
 
+
+
   @include innerWidth2();
   margin: 0 auto;
+
+  @include respond(mobile) {
+    height: auto;
+    padding:30px 20px;
+    background:rgba(255,255,255,1);
+    @include shadow();
+    @include rounded();
+    width:100%;
+  }
+
 
   text-align: left;
   h1 {
     font-size: 72px;
     font-weight: 800;
     text-transform: uppercase;
+
+    @include respond(mobile) {
+      font-size:50px;
+      line-height: 50px;
+      margin-bottom:10px;
+    }
   }
   p {
     text-transform: uppercase;
@@ -45,6 +67,11 @@
     margin-top:20px;
     text-transform: uppercase;
     &:hover {
+      background:#000;
+      color:#fff;
+    }
+
+    @include respond(mobile) {
       background:#000;
       color:#fff;
     }

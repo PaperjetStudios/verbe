@@ -31,6 +31,10 @@ export const schema = yup
       is: (addressRequired) => addressRequired === true,
       then: yup.string().required("Suburb is required"),
     }),
+    Province: yup.string().when("addressRequired", {
+      is: (addressRequired) => addressRequired === true,
+      then: yup.string().required("Province is required"),
+    }),
     City: yup.string().when("addressRequired", {
       is: (addressRequired) => addressRequired === true,
       then: yup.string().required("City is required"),

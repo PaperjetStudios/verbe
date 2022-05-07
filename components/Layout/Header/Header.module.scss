@@ -9,9 +9,16 @@
   justify-content: space-between;
   align-items: center;
 
+  @include respond(mobile) {
+    justify-content: center;
+  }
+
   p {
     font-size: 12px;
     font-weight: 500;
+    @include respond(mobile) {
+      font-size: 14px;
+    }
   }
 
   .topButtons {

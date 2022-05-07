@@ -3,7 +3,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 
-import { Provider } from "jotai";
+import { Provider, useAtom } from "jotai";
 import ApolloProviderContext from "../config/graphql/ApolloProviderContext";
 
 import NextNProgress from "nextjs-progressbar";
@@ -18,6 +18,8 @@ import "../styles/globals.scss";
 import Layout from "../components/Layout/Layout";
 import { theme } from "../theme/chakra-theme";
 import FullScreenLoader from "../components/Common/FullScreenLoader/FullScreenLoader";
+
+import ResetState from "../components/Common/ResetState";
 
 function MyApp({ Component, pageProps }) {
   const [queryClient] = useState(() => new QueryClient());
@@ -45,6 +47,7 @@ function MyApp({ Component, pageProps }) {
       <Hydrate state={pageProps.dehyratedState}>
         <ReactQueryDevtools initialIsOpen={false} />
         <Provider>
+          <ResetState />
           <ApolloProviderContext>
             <ChakraProvider theme={theme}>
               <NextNProgress />

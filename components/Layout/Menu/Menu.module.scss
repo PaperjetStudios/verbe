@@ -1,0 +1,20 @@
+@import "../../../styles/globals.scss";
+
+.container {
+    @include respond(mobile) {
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        flex-direction: column;
+        margin-top:20px;
+        gap:15px;
+    }
+}
+
+.menuItem {
+    @include respond(mobile) {
+        text-align: center;
+        font-size:20px;
+    }
+}

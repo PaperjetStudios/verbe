@@ -4,9 +4,14 @@ import { Controller, useFormContext } from "react-hook-form";
 type CheckboxProps = {
   label: string | React.ReactNode;
   name: string;
+  defaultValue?: boolean;
 };
 
-const PJSCheckbox: React.FC<CheckboxProps> = ({ name, label }) => {
+const PJSCheckbox: React.FC<CheckboxProps> = ({
+  name,
+  label,
+  defaultValue = false,
+}) => {
   const methods = useFormContext();
   const errors = methods.formState.errors;
 
@@ -16,7 +21,7 @@ const PJSCheckbox: React.FC<CheckboxProps> = ({ name, label }) => {
         control={methods.control}
         name={name}
         key={name}
-        defaultValue={false}
+        defaultValue={defaultValue}
         render={({ field: { onChange, value, ref } }) => (
           <Checkbox onChange={onChange} ref={ref} isChecked={value}>
             {label}

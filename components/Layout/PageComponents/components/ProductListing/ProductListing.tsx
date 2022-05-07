@@ -44,8 +44,7 @@ const ProductListing: React.FC<Props> = ({ layout }) => {
     return (
       <Box className={styles.container}>
         <CenteredHeader title={layout.Title} />
-
-        <ProductGrid items={products} />
+        <ProductGrid items={products} swipable={true} />
       </Box>
     );
   } else {

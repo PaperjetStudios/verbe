@@ -4,6 +4,9 @@
     grid-template-columns: 25% 1fr;
     display:grid;
     gap:20px;
+    @include respond(mobile) {
+        grid-template-columns: 1fr;
+    }
     .sideBar {
         background-color: #fff;
         @include shadow();

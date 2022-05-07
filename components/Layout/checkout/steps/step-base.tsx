@@ -9,6 +9,7 @@ import styles from "./steps.module.scss";
 import { useAtom } from "jotai";
 import { Items } from "../../../../data/atoms/cart/cartAtoms";
 import { Icons } from "../../../Common/icons";
+import ClientOnly from "../../../Common/ClientOnly";
 
 type StepProps = {
   handleCurrentStep?: () => void;
@@ -52,17 +53,26 @@ const StepBase: React.FC<StepProps> = ({
           return <CheckoutIcon key={`checkout_${step.title}`} {...step} />;
         })}
       </Box>
-      <Box display="flex" gap={5}>
-        <Box width="70%" className={styles.mainContain}>
-          <Box>{children}</Box>
-        </Box>
+      <ClientOnly>
+        <Box display={["block", null, null, "flex"]} gap={5}>
+          <Box
+            mb={[5, null, null, 0]}
+            width={["100%", null, null, "70%"]}
+            className={styles.mainContain}
+          >
+            <Box>{children}</Box>
+          </Box>
 
-        <Box flex={1} position="relative">
-          <Box position="sticky" className={styles.mainContain}>
-            <Totals disableNext={disableNext} nextAction={handleCurrentStep} />
+          <Box mb={[5, null, null, 0]} flex={1} position="relative">
+            <Box position="sticky" className={styles.mainContain}>
+              <Totals
+                disableNext={disableNext}
+                nextAction={handleCurrentStep}
+              />
+            </Box>
           </Box>
         </Box>
-      </Box>
+      </ClientOnly>
     </>
   );
 };

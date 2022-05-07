@@ -1,9 +1,15 @@
+@import "../../../../styles/globals.scss";
+
 
 .scrollTextContainer {
     display: flex;
     position: relative;
     width: 100vw;
     height:70px;
+
+    @include respond(mobile) {
+        height:50px;
+    }
     margin: auto;
   
     overflow: hidden;

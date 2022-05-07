@@ -10,17 +10,21 @@ export const setup = {
 };
 
 export const dev_api = {
+  name: "development",
   userStateName: "verbe_dev_user",
   cartStateName: "verbe_dev_cart",
   graphqlApi: "http://localhost:1337",
   url: "http://localhost:1337",
+  local: "http://localhost:1337",
 };
 
 export const api = {
+  name: "production",
   userStateName: "verbe_user",
   cartStateName: "verb_cart",
   graphqlApi: "https://admin.verbe.co.za",
   url: "https://admin.verbe.co.za",
+  local: "https://admin.verbe.co.za",
 };
 
 export const DefaultPageSize = 2;

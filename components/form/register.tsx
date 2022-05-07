@@ -1,9 +1,17 @@
 import React, { useState } from "react";
 import general from "./general.module.scss";
 
-import { Box, Button, Stack, Text, useDisclosure } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Checkbox,
+  Stack,
+  Text,
+  useDisclosure,
+  Link,
+} from "@chakra-ui/react";
+import NextLink from "next/link";
 
-import Link from "next/link";
 import { FormProvider, useForm } from "react-hook-form";
 import TextField from "./inputs/textfield";
 
@@ -14,6 +22,7 @@ import * as yup from "yup";
 
 import { axiosInstance } from "../../config/api";
 import ModalBase from "../Modal/ModalBase";
+import PJSCheckbox from "./inputs/checkbox";
 
 const schema = yup
   .object({
@@ -37,6 +46,9 @@ const schema = yup
         }
       )
       .required(),
+    termsAndConditions: yup
+      .bool()
+      .oneOf([true], "You must accept the terms and conditions"),
     password: yup
       .string()
       .min(6, "Password should have atleast 6 characters")
@@ -64,12 +76,16 @@ const FormRegister: React.FC<FormLoginProps> = () => {
 
   const methods = useForm({
     resolver: yupResolver(schema),
+    defaultValues: {
+      termsAndConditions: true,
+      communications: true,
+    },
   });
 
   const onSubmit = async (data: any) => {
     await axiosInstance()
       .post(`/api/auth/local/register`, {
-        username: data.FirstName + " " + data.LastName,
+        username: data.FirstName + " " + data.LastName + Math.random() * 10,
         ...data,
       })
       .then((response: any) => {
@@ -113,13 +129,32 @@ const FormRegister: React.FC<FormLoginProps> = () => {
                 placeholder="Confirm Password"
                 password
               />
+              <PJSCheckbox
+                defaultValue={true}
+                name="termsAndConditions"
+                label={
+                  <Text>
+                    I agree to the{" "}
+                    <NextLink href="/terms-and-conditions" passHref>
+                      <Link textDecoration={"underline"}>
+                        terms and conditions
+                      </Link>
+                    </NextLink>
+                  </Text>
+                }
+              />
+              <PJSCheckbox
+                defaultValue={true}
+                name="communications"
+                label={<Text>I want to receive communications</Text>}
+              />
               <Text fontSize="sm">
                 Already have a profile?{" "}
-                <Link passHref href="/profile/login">
+                <NextLink passHref href="/profile/login">
                   <Text as="a" display={"inline-block"} fontWeight="600">
                     Login here
                   </Text>
-                </Link>
+                </NextLink>
               </Text>
               <Button
                 mt={4}

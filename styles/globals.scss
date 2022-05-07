@@ -1,5 +1,20 @@
 $grey: #666666;
 
+@mixin respond($breakpoint) {
+
+  @if $breakpoint==tablet {
+    @media only screen and (max-width: 600px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint==mobile {
+    @media only screen and (max-width: 900px) {
+      @content;
+    }
+  }
+}
+
 @mixin desktop() {
   @media (min-width: 1000px) {
     @content;
@@ -68,6 +83,9 @@ $grey: #666666;
 
 @mixin componentDefault() {
   padding-bottom: 30px;
+  @include respond(mobile) {
+    padding-bottom:10px;
+  }
 }
 
 @mixin beforeCoverElement() {
@@ -101,6 +119,9 @@ $grey: #666666;
 @mixin greyBacking() {
   background:#f5f5f5;
 }
+
+
+
 
 .chakra-button {
   svg {

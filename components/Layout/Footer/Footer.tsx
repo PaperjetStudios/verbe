@@ -14,6 +14,7 @@ import {
 } from "../../../data/settings/main-menu";
 import { getOptionData, OptionDataType } from "../../../data/settings/options";
 import CartDrawer from "../../Common/Cart/CartDrawer";
+import MobileMenu from "../MobileMenu/MobileMenu";
 
 const Footer = () => {
   const { data: menuData, isLoading: menuLoading } =
@@ -29,17 +30,24 @@ const Footer = () => {
     <>
       <Divider mb={10} />
       <Grid
-        templateColumns={"repeat(4, 1fr)"}
+        templateColumns={["1fr", "repeat(2, 1fr)", null, "repeat(4, 1fr)"]}
         pb={10}
         justifyContent="space-between"
-        gap={10}
+        gap={[5, null, null, 10]}
         className={styles.container}
       >
         {menuData.data.footerMenu.data.attributes.Footer_Columns.map(
           (column, index) => {
             return (
-              <GridItem key={`${column.Title}-${index}`}>
-                <Text mb={6} fontWeight="semibold">
+              <GridItem
+                padding={["0 20px", null, null, "0"]}
+                key={`${column.Title}-${index}`}
+              >
+                <Text
+                  fontSize={["xl", null, null, "md"]}
+                  mb={[3, null, null, 6]}
+                  fontWeight="semibold"
+                >
                   {column.Title}
                 </Text>
                 <FooterItems items={column.Items} />
@@ -51,6 +59,7 @@ const Footer = () => {
       </Grid>
       <CartDrawer />
       <GlobalModals />
+      <MobileMenu />
       {/*  <ChatWidget />
     
         <SearchModal />*/}
