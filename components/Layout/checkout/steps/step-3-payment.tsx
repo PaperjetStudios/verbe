@@ -27,7 +27,7 @@ const Step3Cart: React.FC = () => {
   //const { createOrder, loading } = useCheckout();
 
   const [guest] = useAtom(GuestCheckout);
-  const { user } = useUser();
+  const { isLoggedIn } = useUser();
 
   //const [order] = useAtom(OrderGroup);
   const [totals] = useAtom(Total);
@@ -44,6 +44,7 @@ const Step3Cart: React.FC = () => {
     }
   }, [orderGroup, fullyPaid]);
 */
+  console.log(guest.guestInfo);
 
   return (
     <StepBase handleCurrentStep={handleCurrentStep}>
@@ -55,7 +56,7 @@ const Step3Cart: React.FC = () => {
         Payment
       </Text>
       <Divider />
-      <Widget />
+      {(guest.guestInfo.create_profile_check || isLoggedIn) && <Widget />}
       {!fullyPaid && <Text py={5}>You will be redirected to Payfast</Text>}
 
       <PayfastWidget />

@@ -14,6 +14,7 @@ import useUser from "../../hooks/useUser";
 import { useAtom } from "jotai";
 import { Total } from "../../data/atoms/cart/cartAtoms";
 import { SetCoupon } from "../../data/atoms/coupon/couponAtoms";
+import { GuestCheckout } from "../../data/atoms/checkout/checkoutAtoms";
 
 const schema = yup
   .object({
@@ -60,7 +61,7 @@ const FormCoupon: React.FC<FormCouponProps> = () => {
   const [loading, setLoading] = useState(false);
 
   const [coupon, setCoupon] = useAtom(SetCoupon);
-
+  const [guest] = useAtom(GuestCheckout);
   const { user } = useUser();
   const [totals] = useAtom(Total);
 
@@ -75,8 +76,11 @@ const FormCoupon: React.FC<FormCouponProps> = () => {
 
   useEffect(() => {
     methods.reset({
-      //user: user ? user?.user?.id : -1,
-      user: 1,
+      user: guest.guestInfo.create_profile_check
+        ? -200
+        : user
+        ? user?.user?.id
+        : -1,
       orderTotal: totals ? totals.total : 0,
     });
   }, [user, totals]);

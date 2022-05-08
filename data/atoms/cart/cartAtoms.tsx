@@ -10,6 +10,8 @@ import { CouponAtom, SetCoupon } from "../coupon/couponAtoms";
 
 import { CartItem, CartItems, emptyTotals, Totals } from "./types";
 
+import Router from "next/router";
+
 // ITEMS
 export const Items = atomWithStorage<CartItems>("cart", []);
 
@@ -155,6 +157,7 @@ export const removeItem = atom(
 
     if (Cart.length === 0) {
       toggleDrawerFunction(get, set, false);
+      Router.push("/");
     }
 
     set(Items, Cart);
@@ -234,9 +237,11 @@ export const calculateTotals = (items, checkoutSettings, coupon) => {
   totals.discount = discount;
 
   // Delivery
-  let deliveryPrice = parseAsFloat(settings.settings.shipping_cost);
-  if (settings.settings.free_shipping_enabled) {
-    if (totals.total >= parseAsFloat(settings.settings.free_shipping_limit)) {
+  let deliveryPrice = parseAsFloat(
+    settings ? settings?.settings?.shipping_cost : 0
+  );
+  if (settings ? settings?.settings?.free_shipping_enabled : false) {
+    if (totals.total >= parseAsFloat(settings?.settings?.free_shipping_limit)) {
       deliveryPrice = 0;
     }
   }

@@ -1,0 +1,62 @@
+@import '../../../../styles/globals.scss';
+.container {
+    
+    display:grid;
+
+}
+
+.inner {
+    @include shadow();
+    @include rounded();
+    background-color: #fff;
+    padding:30px;
+}
+
+.InfoBoxText {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    gap:10px;
+    .infoTitle {
+        font-size: 10px;
+        text-transform: uppercase;
+        font-weight: 600;
+        color:#666;
+        letter-spacing: 0.1px;
+    }
+    .infoMation {
+        font-size: 14px;
+    }
+}
+.InfoBoxTextPric_old {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    gap:15px;
+    .infoTitle {
+        font-size: 12px;
+        text-transform: uppercase;
+        font-weight: 600;
+        color:#666;
+        letter-spacing: 0.1px;
+    }
+    .infoMation {
+        color:#000;
+        font-weight: 600;
+        font-size: 14px;
+    }
+}
+.buttonContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.itemContainer {
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    gap:10px;
+    padding:20px 0px 20px;
+    border-bottom: 1px solid #eee;
+}

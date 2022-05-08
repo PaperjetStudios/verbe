@@ -21,6 +21,7 @@ import ScrollText from "./ScrollText/ScrollText";
 
 import Responsive from "../../Common/Responsive";
 import { toggleMobileMenu } from "../../../data/atoms/mobile-menu/mobile-menu";
+import Search from "../../Common/Search/Search";
 
 const Header = () => {
   const { user, isLoggedIn } = useUser();
@@ -28,14 +29,14 @@ const Header = () => {
   const [__, setIsCartOpen] = useAtom(toggleDrawer);
   const [itemCount] = useAtom(CartCount);
   const [_, toggleModal] = useAtom(ToggleModal);
-  const [modal, toggle] = useAtom(ToggleSearchModal);
+  const [modalSearch, toggleSearch] = useAtom(ToggleSearchModal);
   const [mobileMenuShowing, toggleMenuShowing] = useAtom(toggleMobileMenu);
 
   const { data: optionsData, isLoading: optionsLoading } =
     useQuery<OptionDataType>("options", getOptionData);
 
   if (optionsLoading) {
-    return <Loader />;
+    return <Loader contained={false} />;
   }
 
   const options = optionsData?.data.option.data.attributes;
@@ -93,7 +94,7 @@ const Header = () => {
           <Box className={styles.sideMenu}>
             <Responsive.Desktop>
               <IconButton
-                onClick={() => toggle(true)}
+                onClick={() => toggleSearch(true)}
                 aria-label="search"
                 size="lg"
                 variant="transparent"
@@ -153,9 +154,7 @@ const Header = () => {
         </Box>
       </header>
       <Responsive.Mobile>
-        <Box px={2} pb={4}>
-          <Input placeholder="Search..." name="search" />
-        </Box>
+        <Search />
       </Responsive.Mobile>
       <ScrollText />
     </>

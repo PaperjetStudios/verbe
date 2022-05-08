@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import client, { createStrapiAxios } from "../../config/api";
 import { gql } from "@apollo/client";
 
-import { setCookie } from "nookies";
+import { destroyCookie, setCookie } from "nookies";
 
 import { getParsedUserCookies } from "./util";
 import { USER_FRAGMENT } from "../../data/user/queries";
@@ -15,52 +15,80 @@ export default async function userRoute(
 ) {
   const { user, jwt } = getParsedUserCookies(req);
 
-  console.log("Look at the user events");
-
   let newUser = { isLoggedIn: true, user: user };
 
   if (jwt) {
     if (req.method === "POST") {
-      try {
-        await client(jwt)
-          .mutate({
-            mutation: gql`
-              ${USER_FRAGMENT}
-              mutation ($newData: UsersPermissionsUserInput!, $id: ID!) {
-                updateUsersPermissionsUser(id: $id, data: $newData) {
-                  ...USER_FRAGMENT
+      if (req.body.type === "delete") {
+        console.log(jwt);
+        try {
+          await client(jwt)
+            .mutate({
+              mutation: gql`
+                mutation {
+                  deleteMe {
+                    deleted
+                    error
+                  }
                 }
-              }
-            `,
-            variables: { newData: req.body, id: user.id },
-          })
-          .then((data) => {
-            // console.log(data.data.updateUsersPermissionsUser.data.attributes);
-            newUser = {
-              isLoggedIn: true,
-              user: {
-                ...user,
-                //@ts-ignore
-                ...data.data.updateUsersPermissionsUser.data.attributes,
-              },
-            };
-            setCookie(
-              { res },
-              "user",
-              JSON.stringify({ ...newUser, jwt: jwt }),
-              {
-                secure: process.env.NODE_ENV === "production",
-                maxAge: 72576000,
-                httpOnly: true,
+              `,
+              variables: { user: user.id },
+            })
+            .then((data) => {
+              destroyCookie({ res }, "user", {
                 path: "/",
-              }
-            );
-            res.json(newUser);
-          });
-      } catch (e) {
-        console.log(e.networkError?.result?.errors);
-        res.json(e);
-        res.status(405).end();
+              });
+
+              res.json({ deleted: true });
+            });
+        } catch (e) {
+          console.log(e);
+          console.log(e.networkError?.result?.errors);
+          res.json(e);
+          res.status(405).end();
+        }
+      } else {
+        try {
+          await client(jwt)
+            .mutate({
+              mutation: gql`
+                ${USER_FRAGMENT}
+                mutation ($newData: UsersPermissionsUserInput!, $id: ID!) {
+                  updateUsersPermissionsUser(id: $id, data: $newData) {
+                    ...USER_FRAGMENT
+                  }
+                }
+              `,
+              variables: { newData: req.body, id: user.id },
+            })
+            .then((data) => {
+              // console.log(data.data.updateUsersPermissionsUser.data.attributes);
+              newUser = {
+                isLoggedIn: true,
+                user: {
+                  ...user,
+                  //@ts-ignore
+                  ...data.data.updateUsersPermissionsUser.data.attributes,
+                },
+              };
+              setCookie(
+                { res },
+                "user",
+                JSON.stringify({ ...newUser, jwt: jwt }),
+                {
+                  secure: process.env.NODE_ENV === "production",
+                  maxAge: 72576000,
+                  httpOnly: true,
+                  path: "/",
+                }
+              );
+              res.json(newUser);
+            });
+        } catch (e) {
+          console.log(e.networkError?.result?.errors);
+          res.json(e);
+          res.status(405).end();
+        }
       }
     } else {
       if (user) {

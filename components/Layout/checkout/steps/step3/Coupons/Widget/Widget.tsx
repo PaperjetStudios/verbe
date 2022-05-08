@@ -7,6 +7,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useAtom } from "jotai";
+import { GuestCheckout } from "../../../../../../../data/atoms/checkout/checkoutAtoms";
 import { SetCoupon } from "../../../../../../../data/atoms/coupon/couponAtoms";
 import FormCoupon from "../../../../../../form/coupon";
 

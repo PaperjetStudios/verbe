@@ -1,0 +1,16 @@
+@import '../../../../../styles/globals.scss';
+.container {
+    padding:20px;
+    @include shadow();
+}
+.title {
+    font-size: 18px;
+    font-weight: bold;
+    
+}
+.inner {
+    padding:10px 0 10px;
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+}

@@ -1,0 +1,9 @@
+@import '../../../../styles/globals.scss';
+
+.tableRow {
+    cursor:pointer;
+    @include transition();
+    &:hover {
+        background-color: #efefef;
+    }
+}

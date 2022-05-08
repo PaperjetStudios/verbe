@@ -65,31 +65,32 @@ const FormNewsletter: React.FC<FormNewsletterProps> = () => {
     setLoading(false);
   };
 
+  const hideNotifications = success || fail;
+
   return (
     <>
-      {success ||
-        (fail && (
-          <>
-            {fail && (
-              <Alert status="error">
-                <AlertIcon />
-                <AlertDescription>
-                  You are already subscribed to our newsletter.
-                </AlertDescription>
-              </Alert>
-            )}
+      {hideNotifications && (
+        <>
+          {fail && (
+            <Alert status="error">
+              <AlertIcon />
+              <AlertDescription>
+                You are already subscribed to our newsletter.
+              </AlertDescription>
+            </Alert>
+          )}
 
-            {success && (
-              <Alert status="success">
-                <AlertIcon />
-                <AlertDescription>
-                  You have been subscribed to our newsletter.
-                </AlertDescription>
-              </Alert>
-            )}
-          </>
-        ))}
-      {!success && !fail && (
+          {success && (
+            <Alert status="success">
+              <AlertIcon />
+              <AlertDescription>
+                You have been subscribed to our newsletter.
+              </AlertDescription>
+            </Alert>
+          )}
+        </>
+      )}
+      {!hideNotifications && (
         <>
           <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(onSubmit)}>

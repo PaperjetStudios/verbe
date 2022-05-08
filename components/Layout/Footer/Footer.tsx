@@ -60,6 +60,7 @@ const Footer = () => {
       <CartDrawer />
       <GlobalModals />
       <MobileMenu />
+
       {/*  <ChatWidget />
     
         <SearchModal />*/}

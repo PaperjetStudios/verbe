@@ -1,12 +1,10 @@
 import { Box, Button } from "@chakra-ui/react";
-import { useAtom } from "jotai";
+
 import { useEffect, useRef, useState } from "react";
 import { axiosInstance } from "../../../../../../config/api";
-import { OrderData } from "../../../../../../data/orders/types";
+
 import useCheckout from "../useCheckout";
 import { createPFData } from "./PayfastUtils";
-
-import { Items, Total } from "../../../../../../data/atoms/cart/cartAtoms";
 
 export type PayfastWidgetProps = {};
 

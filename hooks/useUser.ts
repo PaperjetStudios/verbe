@@ -72,6 +72,19 @@ export default function useUser() {
 
   const updateUser = (newInfo: any) => axios.post("/api/user", newInfo);
 
+  const deleteUser = () =>
+    axios.post("/api/user", {
+      type: "delete",
+    });
+
+  let deleteMutation = useMutation(deleteUser, {
+    onSuccess: (data) => {
+      queryClient.setQueryData("user", emptyUser);
+      setUser(emptyUser);
+      Router.push("/");
+    },
+  });
+
   let mutation = useMutation(updateUser, {
     onError: (err) => {
       console.log("err", err);
@@ -97,6 +110,7 @@ export default function useUser() {
     getUserAgain,
     user: user,
     logUserIn: logUserIn,
+    deleteMutation,
     logoutMutation,
     isLoggedIn: user?.isLoggedIn,
     userMutation: mutation,

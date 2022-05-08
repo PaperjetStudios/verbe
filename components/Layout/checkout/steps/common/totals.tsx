@@ -56,6 +56,7 @@ const Totals: React.FC<TotalsProps> = ({ nextAction, disableNext = false }) => {
   }
   const total = totals.total;
 
+  console.log("totals", totals);
   return (
     <Box>
       <Text align={"center"} fontSize="xl" fontWeight="bold">

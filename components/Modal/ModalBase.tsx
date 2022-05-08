@@ -30,6 +30,8 @@ type Props = {
   message?: string;
   children?: React.ReactNode;
   hideFooter?: boolean;
+  size?: "lg" | "sm" | "md";
+  centered?: boolean;
 };
 
 const ModalBase: React.FC<Props> = ({
@@ -41,6 +43,8 @@ const ModalBase: React.FC<Props> = ({
   subtitle = "",
   heading = "",
   hideFooter = false,
+  size = "lg",
+  centered = true,
 }) => {
   const { isOpen, onOpen, onClose } = disclosure;
 
@@ -56,13 +60,13 @@ const ModalBase: React.FC<Props> = ({
   return (
     <>
       <Modal
-        size="lg"
-        isCentered={true}
+        size={size}
+        isCentered={centered}
         isOpen={isOpen ? isOpen : false}
         onClose={onClose ? onClose : () => {}}
       >
         <ModalOverlay />
-        <ModalContent className={styles.main}>
+        <ModalContent maxW={["90%", "70%"]} className={styles.main}>
           <ModalHeader
             fontSize={25}
             fontWeight="700"
@@ -77,7 +81,10 @@ const ModalBase: React.FC<Props> = ({
             {heading === "" && modalData.Headline}
           </ModalHeader>
           <ModalCloseButton className={styles.closebutton} />
-          <ModalBody padding={"30px 30px"} className={styles.body}>
+          <ModalBody
+            padding={["20px", "20px", null, "30px 30px"]}
+            className={styles.body}
+          >
             <>
               {message === "" && (
                 <Text

@@ -9,6 +9,7 @@ import {
   GuestCheckout,
   SetAddress,
 } from "../../../../data/atoms/checkout/checkoutAtoms";
+import { SetCoupon } from "../../../../data/atoms/coupon/couponAtoms";
 import useUser from "../../../../hooks/useUser";
 
 import AddressList from "../../../form/user/address/AddressList/AddressList";
@@ -25,6 +26,7 @@ const Step2Cart: React.FC = () => {
   const [guestInfo, setGuestInfo] = useAtom(GuestCheckout);
   const { isLoggedIn, user } = useUser();
   const [selectedAddress] = useAtom(SetAddress);
+  const [coupon, setCoupon] = useAtom(SetCoupon);
 
   const { nextStep } = useWizard();
 
@@ -38,6 +40,10 @@ const Step2Cart: React.FC = () => {
   const submit: SubmitHandler<FormType> = (data) => {
     try {
       setGuestInfo({ guestInfo: data });
+
+      if (!data.create_profile_check) {
+        setCoupon(null);
+      }
       unlock(3);
       nextStep();
     } catch (e) {

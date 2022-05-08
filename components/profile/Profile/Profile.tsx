@@ -1,6 +1,7 @@
 import { Box, Button, Divider, HStack } from "@chakra-ui/react";
 import useUser from "../../../hooks/useUser";
 import ProfileForm from "../../form/user/profile/profile";
+import Delete from "./Delete/Delete";
 
 import styles from "./Profile.module.scss";
 
@@ -21,7 +22,8 @@ const Profile: React.FC<ProfileProps> = ({}) => {
         >
           Log out
         </Button>
-        <Button colorScheme="red">Delete Profile</Button>
+
+        <Delete />
       </HStack>
     </Box>
   );

@@ -19,7 +19,7 @@ const CartList: React.FC<CartListProps> = ({}) => {
         {cart.map((obj: CartItem, ind: number) => {
           return (
             <CartItemElement
-              key={obj.Product.data.attributes.Title}
+              key={obj.Product.data.attributes.Title + ind}
               Index={{ product: ind }}
               {...obj}
             />
