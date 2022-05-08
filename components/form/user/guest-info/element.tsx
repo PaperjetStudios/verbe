@@ -1,10 +1,11 @@
-import { HStack, Stack, Box, Divider, Text } from "@chakra-ui/react";
+import { HStack, Stack, Box, Divider, Text, Link } from "@chakra-ui/react";
 import { useAtom } from "jotai";
 import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 
 import PJSCheckbox from "../../inputs/checkbox";
 import TextField from "../../inputs/textfield";
+import NextLink from "next/link";
 
 type Props = {
   className?: string;
@@ -76,6 +77,20 @@ const GuestFormElement: React.FC<Props> = ({ buttonEl }) => {
               defaultValue={true}
               name="communications"
               label={<Text>I want to receive communications</Text>}
+            />
+            <PJSCheckbox
+              defaultValue={true}
+              name="termsAndConditions"
+              label={
+                <Text>
+                  I agree to the{" "}
+                  <NextLink href="/terms-and-conditions" passHref>
+                    <Link textDecoration={"underline"}>
+                      terms and conditions
+                    </Link>
+                  </NextLink>
+                </Text>
+              }
             />
           </>
         )}

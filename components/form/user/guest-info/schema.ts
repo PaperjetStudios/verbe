@@ -47,6 +47,12 @@ export const schema = yup
       is: (addressRequired) => addressRequired === true,
       then: yup.string().required("Zip code is required"),
     }),
+    termsAndConditions: yup.bool().when("create_profile_check", {
+      is: (create_profile_check) => create_profile_check === true,
+      then: yup
+        .bool()
+        .oneOf([true], "You must agree to the terms and conditions"),
+    }),
     password: yup.string().when("create_profile_check", {
       is: (create_profile_check) => create_profile_check === true,
       then: yup
