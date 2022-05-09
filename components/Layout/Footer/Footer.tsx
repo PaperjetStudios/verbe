@@ -15,6 +15,7 @@ import {
 import { getOptionData, OptionDataType } from "../../../data/settings/options";
 import CartDrawer from "../../Common/Cart/CartDrawer";
 import MobileMenu from "../MobileMenu/MobileMenu";
+import Popia from "../../Common/Popia/Popia";
 
 const Footer = () => {
   const { data: menuData, isLoading: menuLoading } =
@@ -60,7 +61,7 @@ const Footer = () => {
       <CartDrawer />
       <GlobalModals />
       <MobileMenu />
-
+      <Popia />
       {/*  <ChatWidget />
     
         <SearchModal />*/}

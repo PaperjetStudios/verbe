@@ -38,9 +38,7 @@ export const ToggleModal = atom(
   (get, set, args: toggleArgs) => {
     const { name, toggle } = args;
     let modals = get(Modals);
-    console.log("modals", modals);
     const index = findModalIndexByName(modals, name);
-    console.log("modals index", index);
 
     modals = produce(get(Modals), (draft) => {
       draft[index].isOpen = toggle;
