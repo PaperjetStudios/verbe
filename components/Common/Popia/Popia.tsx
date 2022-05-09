@@ -1,11 +1,11 @@
 import { Box, Button, Link, Text, useToast } from "@chakra-ui/react";
 import { useAtom } from "jotai";
 import { useEffect, useRef } from "react";
+import { setPopia } from "../../../store/atoms/popia/popia";
 
 import styles from "./Popia.module.scss";
 
 import NextLink from "next/link";
-import { setPopia } from "../../../data/atoms/popia/popia";
 
 export type PopiaProps = {};
 
@@ -13,11 +13,13 @@ const Popia: React.FC<PopiaProps> = ({}) => {
   const [accepted, setAccepted] = useAtom(setPopia);
   const toast = useToast();
   const toastIdRef = useRef();
+  const id = "popi-toast";
 
   useEffect(() => {
-    if (!accepted && !toastIdRef.current) {
+    if (!accepted && !!toast.isActive(id)) {
       //@ts-ignore
       toastIdRef.current = toast({
+        id,
         title: "This site uses cookies",
         description: "We've created your account for you.",
         status: "success",
