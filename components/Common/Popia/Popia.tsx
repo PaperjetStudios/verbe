@@ -1,11 +1,11 @@
 import { Box, Button, Link, Text, useToast } from "@chakra-ui/react";
 import { useAtom } from "jotai";
 import { useEffect, useRef } from "react";
-import { setPopia } from "../../../store/atoms/popia/popia";
 
 import styles from "./Popia.module.scss";
 
 import NextLink from "next/link";
+import { setPopia } from "../../../data/atoms/popia/popia";
 
 export type PopiaProps = {};
 
