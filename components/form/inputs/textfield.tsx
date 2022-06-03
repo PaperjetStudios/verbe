@@ -14,6 +14,7 @@ type TextFieldProps = {
   password?: boolean;
   textarea?: boolean;
   size?: string;
+  sx?: any;
 };
 
 const TextField: React.FC<TextFieldProps> = ({
@@ -23,6 +24,7 @@ const TextField: React.FC<TextFieldProps> = ({
   password = false,
   textarea = false,
   size = "md",
+  sx = {},
 }) => {
   const methods = useFormContext();
   const errors = methods.formState.errors;
@@ -41,6 +43,7 @@ const TextField: React.FC<TextFieldProps> = ({
           id={name}
           px={size === "sm" ? "sm" : 2}
           fontSize={size}
+          sx={sx}
           placeholder={placeholder}
           {...methods.register(name)}
         />

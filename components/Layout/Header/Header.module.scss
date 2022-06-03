@@ -59,6 +59,8 @@
   .logoAndMenuContainer {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    flex:1;
     gap: 30px;
     nav {
       display: flex;

@@ -156,7 +156,7 @@ const Header = () => {
       <Responsive.Mobile>
         <Search />
       </Responsive.Mobile>
-      <ScrollText />
+      {/*<ScrollText />*/}
     </>
   );
 };

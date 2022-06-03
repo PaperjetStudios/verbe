@@ -16,6 +16,7 @@ import { getOptionData, OptionDataType } from "../../../data/settings/options";
 import CartDrawer from "../../Common/Cart/CartDrawer";
 import MobileMenu from "../MobileMenu/MobileMenu";
 import Popia from "../../Common/Popia/Popia";
+import ModalNewsletter from "../../Modal/SignUpModal";
 
 const Footer = () => {
   const { data: menuData, isLoading: menuLoading } =
@@ -62,6 +63,7 @@ const Footer = () => {
       <GlobalModals />
       <MobileMenu />
       <Popia />
+      <ModalNewsletter />
       {/*  <ChatWidget />
     
         <SearchModal />*/}

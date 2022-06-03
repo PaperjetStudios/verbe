@@ -24,9 +24,10 @@
 }
 
 .titleBox {
-  padding: 50px 50px 30px;
+  padding: 0;// 50px 50px 30px;
 
-
+  position:absolute;
+  bottom:10%;
 
   @include innerWidth2();
   margin: 0 auto;
@@ -34,10 +35,12 @@
   @include respond(mobile) {
     height: auto;
     padding:30px 20px;
-    background:rgba(255,255,255,1);
-    @include shadow();
+    text-align: center;
+    //background:rgba(255,255,255,1);
+    //@include shadow();
     @include rounded();
     width:100%;
+    bottom:15%;
   }
 
 
@@ -64,7 +67,7 @@
     background:#fff;
     font-size: 14px;
     padding:21px 30px 20px;
-    margin-top:20px;
+    //margin-top:20px;
     text-transform: uppercase;
     &:hover {
       background:#000;
