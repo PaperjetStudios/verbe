@@ -92,7 +92,8 @@ export const FIND_PRODUCT_BY_SLUG = gql`
 export const FIND_PRODUCT_BY_CAT_SLUG = (
   filterString: string,
   sortString: string
-) => gql`
+) => {
+  const graph = `
   ${PRODUCT_FRAGMENT}
   query ($slug: String!, $page: Int!, $pageSize: Int!) {
     products(
@@ -114,6 +115,31 @@ export const FIND_PRODUCT_BY_CAT_SLUG = (
     }
   }
 `;
+
+  console.log("FFIND", graph);
+  return gql`
+  ${PRODUCT_FRAGMENT}
+  query ($slug: String!, $page: Int!, $pageSize: Int!) {
+    products(
+      ${sortString}
+      filters: { Categories: { slug: { eq: $slug } } ${filterString} }
+      pagination: { page: $page, pageSize: $pageSize }
+    ) {
+      data {
+        ...PRODUCT_FRAGMENT
+      }
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
+    }
+  }
+`;
+};
 
 export const FIND_PRODUCT_BY_TAG = (
   filterString: string,

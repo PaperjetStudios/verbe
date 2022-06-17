@@ -37,7 +37,7 @@ const Filter: React.FC<FilterProps> = ({}) => {
             setSize(val !== "" ? val : "any");
           }}
         >
-          <MenuItemOption value="any">Any</MenuItemOption>
+          <MenuItemOption value="all">Any</MenuItemOption>
           <MenuItemOption value="S">S</MenuItemOption>
           <MenuItemOption value="M">M</MenuItemOption>
           <MenuItemOption value="L">L</MenuItemOption>

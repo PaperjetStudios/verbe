@@ -51,7 +51,7 @@ export const makeFilterString = (filters?: ProductFilters) => {
     }
 
     if (filters.size !== "all" && filters.size) {
-      filterString += `, Sizes: { Label : eq: "${filters.size}"}}`;
+      filterString += `, Sizes: { Label : {eq: "${filters.size}"}}`;
     }
     if (filters.instock) {
       filterString += `, in_stock: {eq: ${filters.instock}}`;
