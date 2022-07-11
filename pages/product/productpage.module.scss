@@ -33,5 +33,7 @@
   @include respond(mobile) {
     padding-bottom:30px;
   }
+  position:relative;
+  z-index:1000;
 
 }
