@@ -6,6 +6,7 @@ import {
 } from "../../../data/settings/main-menu";
 
 import styles from "./Menu.module.scss";
+import MenuDropdown from "./MenuDropdown";
 import MenuItem from "./MenuItem";
 
 const Menu = () => {
@@ -22,9 +23,11 @@ const Menu = () => {
 
   return (
     <nav className={styles.container}>
+      <MenuDropdown items={menu?.Item} />
+      {/*
       {menu?.Item.map((item: MainMenuItemType, index) => {
         return <MenuItem key={index} {...item} />;
-      })}
+      })} */}
     </nav>
   );
 };

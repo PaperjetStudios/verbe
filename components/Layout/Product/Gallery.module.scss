@@ -6,6 +6,8 @@
   @include respond(mobile) {
     width:100%;
   }
+  height:1px;
+
 }
 .slider {
   position: relative;
@@ -24,10 +26,11 @@
 
 .slider_sub {
   position: relative;
-  margin-top:20px;
+  margin-bottom:40px;
+
   .slick-track {
-    display: flex !important;
-    gap: 20px !important;
+   // display: flex !important;
+    //gap: 30px !important;
   }
 }
 
