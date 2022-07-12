@@ -150,7 +150,7 @@ const Product = (props: any) => {
                 bottom={0}
                 left={0}
                 right={0}
-                zIndex={1000}
+                zIndex={10020}
               >
                 <Quantity
                   quantity={quantity}
@@ -268,8 +268,14 @@ const Product = (props: any) => {
           <ProductTabs productData={product} id={props.product.id} />
         </HStack>
         <Box className={styles.sectionContainer}>
-          <Text fontWeight="bold" mb={8} fontSize="3xl" textAlign="center">
-            Similar Products
+          <Text
+            ml={[3, 0]}
+            fontWeight="bold"
+            mb={8}
+            fontSize="3xl"
+            textAlign="left"
+          >
+            You May Also Like
           </Text>
           <ProductGrid swipable={false} items={props.similar} />
         </Box>
@@ -281,8 +287,7 @@ const Product = (props: any) => {
 export const getServerSideProps = async (context: any) => {
   const data = await getProductDataBySlug(context.params.slug);
   const cat =
-    data.data.findProductBySlug.data.attributes.Categories.data[0].attributes
-      .slug;
+    data.data.findProductBySlug.data.attributes.Collection.data.attributes.slug;
 
   const similar = await getProductsDataByCategorySlug(cat, 1, 10, {
     instock: true,

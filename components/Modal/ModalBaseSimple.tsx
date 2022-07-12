@@ -66,7 +66,7 @@ const ModalBaseSimple: React.FC<Props> = ({
         <ModalOverlay background="rgba(255,255,255,0.5)" />
         <ModalContent
           rounded={"none"}
-          maxW={["40%", "40%"]}
+          maxW={["100%", "40%"]}
           className={styles.main}
           background="#000"
         >
@@ -77,6 +77,7 @@ const ModalBaseSimple: React.FC<Props> = ({
           >
             <VStack alignItems="center" justifyContent={"center"}>
               <Text
+                textAlign={["center", "left"]}
                 fontSize="100px"
                 lineHeight="0.8"
                 textTransform={"uppercase"}
@@ -85,7 +86,12 @@ const ModalBaseSimple: React.FC<Props> = ({
               >
                 {modalData.Headline}
               </Text>
-              <Text color="#fff" fontWeight="bold" letterSpacing={"2px"}>
+              <Text
+                textAlign={["center", "left"]}
+                color="#fff"
+                fontWeight="bold"
+                letterSpacing={"2px"}
+              >
                 {modalData.Message}
               </Text>
               <>{children}</>

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import Responsive from "../../Common/Responsive";
+
 function ImageMagnifier({
   src,
   width,
@@ -52,36 +54,37 @@ function ImageMagnifier({
         }}
         alt={"img"}
       />
+      <Responsive.Desktop>
+        <div
+          style={{
+            display: showMagnifier ? "" : "none",
+            position: "absolute",
 
-      <div
-        style={{
-          display: showMagnifier ? "" : "none",
-          position: "absolute",
+            // prevent magnifier blocks the mousemove event of img
+            pointerEvents: "none",
+            // set size of magnifier
+            height: `${magnifierHeight}px`,
+            width: `${magnifieWidth}px`,
+            // move element center to cursor pos
+            top: `${y - magnifierHeight / 2}px`,
+            left: `${x - magnifieWidth / 2}px`,
+            opacity: "1", // reduce opacity so you can verify position
+            border: "1px solid lightgray",
+            backgroundColor: "white",
+            backgroundImage: `url('${src}')`,
+            backgroundRepeat: "no-repeat",
 
-          // prevent magnifier blocks the mousemove event of img
-          pointerEvents: "none",
-          // set size of magnifier
-          height: `${magnifierHeight}px`,
-          width: `${magnifieWidth}px`,
-          // move element center to cursor pos
-          top: `${y - magnifierHeight / 2}px`,
-          left: `${x - magnifieWidth / 2}px`,
-          opacity: "1", // reduce opacity so you can verify position
-          border: "1px solid lightgray",
-          backgroundColor: "white",
-          backgroundImage: `url('${src}')`,
-          backgroundRepeat: "no-repeat",
+            //calculate zoomed image size
+            backgroundSize: `${imgWidth * zoomLevel}px ${
+              imgHeight * zoomLevel
+            }px`,
 
-          //calculate zoomed image size
-          backgroundSize: `${imgWidth * zoomLevel}px ${
-            imgHeight * zoomLevel
-          }px`,
-
-          //calculate position of zoomed image.
-          backgroundPositionX: `${-x * zoomLevel + magnifieWidth / 2}px`,
-          backgroundPositionY: `${-y * zoomLevel + magnifierHeight / 2}px`,
-        }}
-      ></div>
+            //calculate position of zoomed image.
+            backgroundPositionX: `${-x * zoomLevel + magnifieWidth / 2}px`,
+            backgroundPositionY: `${-y * zoomLevel + magnifierHeight / 2}px`,
+          }}
+        ></div>
+      </Responsive.Desktop>
     </div>
   );
 }

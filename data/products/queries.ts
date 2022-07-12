@@ -66,6 +66,14 @@ export const PRODUCT_FRAGMENT = gql`
           }
         }
       }
+      Collection {
+        data {
+          id
+          attributes {
+            ...BASE_CATEGORY
+          }
+        }
+      }
       Categories {
         data {
           id
@@ -116,7 +124,6 @@ export const FIND_PRODUCT_BY_CAT_SLUG = (
   }
 `;
 
-  console.log("FFIND", graph);
   return gql`
   ${PRODUCT_FRAGMENT}
   query ($slug: String!, $page: Int!, $pageSize: Int!) {

@@ -50,6 +50,9 @@ export type SingleProductAttributes = {
   Categories: {
     data: Category[];
   };
+  Collection: {
+    data: Category;
+  };
 };
 
 export type SingleProduct = {
