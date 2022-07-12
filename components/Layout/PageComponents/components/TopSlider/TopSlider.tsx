@@ -4,9 +4,13 @@ import Slider from "react-slick";
 
 import { Box, Button } from "@chakra-ui/react";
 import { Icons } from "../../../../Common/icons";
-import { createImageLink } from "../../../../../config/util";
+import {
+  createCategoryLink,
+  createImageLink,
+} from "../../../../../config/util";
 import { ComponentLayoutGallery } from "../../../../../data/layout/gallery";
 import ReactMarkdown from "react-markdown";
+import Link from "next/link";
 
 type TopSliderProps = {
   layout: ComponentLayoutGallery;
@@ -38,19 +42,23 @@ const TopSlider: React.FC<TopSliderProps> = ({ layout }) => {
         {layout.Image.map((item, index) => {
           return (
             <div key={`slide_${index}`}>
-              <div
-                className={styles.slide}
-                style={{
-                  backgroundImage: `url(${createImageLink(
-                    item?.Source?.data?.attributes.url
-                  )})`,
-                }}
-              >
-                <div className={styles.titleBox}>
-                  <ReactMarkdown>{item.Text}</ReactMarkdown>
-                  <Button variant="main_white">{item.cta_title}</Button>
-                </div>
-              </div>
+              <Link passHref href={"category/" + item?.cta_link}>
+                <a href="#">
+                  <div
+                    className={styles.slide}
+                    style={{
+                      backgroundImage: `url(${createImageLink(
+                        item?.Source?.data?.attributes.url
+                      )})`,
+                    }}
+                  >
+                    <div className={styles.titleBox}>
+                      <ReactMarkdown>{item.Text}</ReactMarkdown>
+                      {/*<Button variant="main_white">{item.cta_title}</Button>*/}
+                    </div>
+                  </div>
+                </a>
+              </Link>
             </div>
           );
         })}
